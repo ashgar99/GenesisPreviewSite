@@ -215,6 +215,58 @@ body {
     overflow: hidden;
 }
 
+/* ==================== */
+/* LONDON SKYLINE       */
+/* ==================== */
+
+.hero-skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    pointer-events: none;
+    color: var(--charcoal-deep);
+    overflow: hidden;
+}
+
+.skyline-svg {
+    width: 100%;
+    height: 100%;
+    min-width: 1920px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.skyline-layer-1 {
+    animation: skylineDrift1 45s ease-in-out infinite;
+}
+
+.skyline-layer-2 {
+    animation: skylineDrift2 60s ease-in-out infinite;
+}
+
+.skyline-layer-3 {
+    animation: skylineDrift3 80s ease-in-out infinite;
+}
+
+@keyframes skylineDrift1 {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-15px); }
+}
+
+@keyframes skylineDrift2 {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+@keyframes skylineDrift3 {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-8px); }
+}
+
 .hero-content {
     max-width: 800px;
     text-align: center;
@@ -376,19 +428,58 @@ body {
     border-radius: 4px;
     height: 8px;
     overflow: hidden;
+    position: relative;
 }
 
 .confidence-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--teal-dark), var(--teal));
+    background: linear-gradient(90deg, var(--teal-dark), var(--teal), var(--teal-light));
+    background-size: 200% 100%;
     border-radius: 4px;
-    width: 67%;
-    animation: fillIn 1.5s ease-out forwards;
+    width: 0%;
+    animation: fillIn 2s ease-out forwards, shimmer 3s ease-in-out infinite;
+    animation-delay: 0.5s, 2.5s;
+    position: relative;
+}
+
+.confidence-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: pulseSweep 2.5s ease-in-out infinite;
+    animation-delay: 3s;
+    opacity: 0;
 }
 
 @keyframes fillIn {
     from { width: 0%; }
     to { width: 67%; }
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes pulseSweep {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
 }
 
 .confidence-label {
@@ -402,6 +493,33 @@ body {
 .confidence-value {
     color: var(--cream);
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.confidence-percent {
+    display: inline-block;
+    min-width: 24px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.confidence-change {
+    color: var(--pass);
+    animation: pulseGlow 2s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: none;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba(74, 124, 92, 0.6);
+    }
 }
 
 /* ==================== */
