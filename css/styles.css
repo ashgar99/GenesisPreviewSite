@@ -442,19 +442,6 @@ body {
     position: relative;
 }
 
-.confidence-pulse {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-    background-size: 200% 100%;
-    animation: pulseSweep 2.5s ease-in-out infinite;
-    animation-delay: 3s;
-    opacity: 0;
-}
-
 @keyframes fillIn {
     from { width: 0%; }
     to { width: 67%; }
@@ -463,23 +450,6 @@ body {
 @keyframes shimmer {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-}
-
-@keyframes pulseSweep {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
 }
 
 .confidence-label {
