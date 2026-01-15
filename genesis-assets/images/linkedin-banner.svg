@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396">
+  <!-- Background -->
+  <rect width="1584" height="396" fill="#1a1d21"/>
+  
+  <!-- Symbol A positioned left -->
+  <circle cx="250" cy="198" r="100" fill="none" stroke="#2a2d31" stroke-width="2"/>
+  <circle cx="350" cy="198" r="100" fill="none" stroke="#3a6262" stroke-width="2"/>
+  
+  <!-- Content -->
+  <text x="792" y="180" font-family="Georgia, serif" font-size="56" font-weight="400" fill="#f8f7f4" text-anchor="middle">Genesis</text>
+  <text x="792" y="240" font-family="Arial, sans-serif" font-size="22" fill="#9a968f" text-anchor="middle">Decision intelligence for modern teams</text>
+</svg>
