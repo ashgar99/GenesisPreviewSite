@@ -59,6 +59,47 @@
     }
 
     // ==================== //
+    // CONFIDENCE COUNTER   //
+    // ==================== //
+
+    function initConfidenceCounter() {
+        const percentEl = document.querySelector('.confidence-percent');
+        if (!percentEl) return;
+
+        const target = parseInt(percentEl.dataset.target, 10) || 67;
+        const duration = 2000; // 2 seconds
+        const startDelay = 500; // Match the fill animation delay
+        let hasAnimated = false;
+
+        function animateCounter() {
+            if (hasAnimated) return;
+            hasAnimated = true;
+
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease-out cubic for smooth deceleration
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.round(easeOut * target);
+
+                percentEl.textContent = currentValue;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Start counter after delay
+        setTimeout(animateCounter, startDelay);
+    }
+
+    // ==================== //
     // SMOOTH SCROLLING     //
     // ==================== //
 
@@ -177,6 +218,7 @@
         initFormHandling();
         initLanguageSelector();
         initNavScroll();
+        initConfidenceCounter();
 
         // Initialize i18n if available
         if (typeof i18n !== 'undefined') {

@@ -56,6 +56,80 @@
 
     <!-- Hero -->
     <section class="hero">
+        <!-- Animated London Skyline Background -->
+        <div class="hero-skyline">
+            <svg class="skyline-svg" viewBox="0 0 1920 400" preserveAspectRatio="xMidYMax slice" fill="none">
+                <!-- Layer 3 - Furthest buildings (most transparent) -->
+                <g class="skyline-layer skyline-layer-3" opacity="0.03">
+                    <rect x="50" y="280" width="60" height="120" fill="currentColor"/>
+                    <rect x="130" y="250" width="45" height="150" fill="currentColor"/>
+                    <rect x="200" y="300" width="70" height="100" fill="currentColor"/>
+                    <rect x="320" y="260" width="50" height="140" fill="currentColor"/>
+                    <rect x="420" y="290" width="80" height="110" fill="currentColor"/>
+                    <rect x="550" y="240" width="55" height="160" fill="currentColor"/>
+                    <rect x="650" y="280" width="65" height="120" fill="currentColor"/>
+                    <rect x="750" y="300" width="45" height="100" fill="currentColor"/>
+                    <rect x="850" y="250" width="70" height="150" fill="currentColor"/>
+                    <rect x="950" y="270" width="60" height="130" fill="currentColor"/>
+                    <rect x="1050" y="290" width="55" height="110" fill="currentColor"/>
+                    <rect x="1150" y="260" width="75" height="140" fill="currentColor"/>
+                    <rect x="1280" y="280" width="50" height="120" fill="currentColor"/>
+                    <rect x="1380" y="300" width="65" height="100" fill="currentColor"/>
+                    <rect x="1480" y="250" width="55" height="150" fill="currentColor"/>
+                    <rect x="1580" y="270" width="70" height="130" fill="currentColor"/>
+                    <rect x="1700" y="290" width="60" height="110" fill="currentColor"/>
+                    <rect x="1800" y="260" width="80" height="140" fill="currentColor"/>
+                </g>
+                <!-- Layer 2 - Mid buildings -->
+                <g class="skyline-layer skyline-layer-2" opacity="0.05">
+                    <rect x="80" y="300" width="50" height="100" fill="currentColor"/>
+                    <rect x="180" y="270" width="40" height="130" fill="currentColor"/>
+                    <rect x="280" y="320" width="60" height="80" fill="currentColor"/>
+                    <rect x="380" y="280" width="55" height="120" fill="currentColor"/>
+                    <rect x="500" y="300" width="45" height="100" fill="currentColor"/>
+                    <rect x="600" y="260" width="50" height="140" fill="currentColor"/>
+                    <rect x="700" y="290" width="60" height="110" fill="currentColor"/>
+                    <rect x="800" y="310" width="40" height="90" fill="currentColor"/>
+                    <!-- The Shard silhouette -->
+                    <polygon points="920,180 940,400 900,400" fill="currentColor"/>
+                    <rect x="1000" y="280" width="55" height="120" fill="currentColor"/>
+                    <!-- Gherkin silhouette -->
+                    <ellipse cx="1120" cy="340" rx="30" ry="60" fill="currentColor"/>
+                    <rect x="1200" y="300" width="50" height="100" fill="currentColor"/>
+                    <rect x="1300" y="270" width="60" height="130" fill="currentColor"/>
+                    <rect x="1420" y="290" width="45" height="110" fill="currentColor"/>
+                    <rect x="1520" y="260" width="55" height="140" fill="currentColor"/>
+                    <rect x="1620" y="300" width="50" height="100" fill="currentColor"/>
+                    <rect x="1720" y="280" width="65" height="120" fill="currentColor"/>
+                </g>
+                <!-- Layer 1 - Closest buildings (most visible) -->
+                <g class="skyline-layer skyline-layer-1" opacity="0.07">
+                    <rect x="20" y="330" width="70" height="70" fill="currentColor"/>
+                    <rect x="120" y="300" width="55" height="100" fill="currentColor"/>
+                    <rect x="220" y="340" width="50" height="60" fill="currentColor"/>
+                    <rect x="320" y="310" width="65" height="90" fill="currentColor"/>
+                    <rect x="440" y="330" width="45" height="70" fill="currentColor"/>
+                    <rect x="540" y="300" width="60" height="100" fill="currentColor"/>
+                    <rect x="660" y="320" width="50" height="80" fill="currentColor"/>
+                    <rect x="760" y="340" width="55" height="60" fill="currentColor"/>
+                    <!-- Tower Bridge silhouette -->
+                    <rect x="860" y="320" width="25" height="80" fill="currentColor"/>
+                    <rect x="920" y="320" width="25" height="80" fill="currentColor"/>
+                    <rect x="860" y="300" width="85" height="25" fill="currentColor"/>
+                    <polygon points="860,300 872,270 872,300" fill="currentColor"/>
+                    <polygon points="945,300 933,270 933,300" fill="currentColor"/>
+                    <rect x="1000" y="330" width="50" height="70" fill="currentColor"/>
+                    <rect x="1100" y="310" width="60" height="90" fill="currentColor"/>
+                    <rect x="1200" y="340" width="45" height="60" fill="currentColor"/>
+                    <rect x="1300" y="300" width="55" height="100" fill="currentColor"/>
+                    <rect x="1400" y="320" width="50" height="80" fill="currentColor"/>
+                    <rect x="1500" y="340" width="65" height="60" fill="currentColor"/>
+                    <rect x="1600" y="310" width="55" height="90" fill="currentColor"/>
+                    <rect x="1720" y="330" width="60" height="70" fill="currentColor"/>
+                    <rect x="1840" y="300" width="60" height="100" fill="currentColor"/>
+                </g>
+            </svg>
+        </div>
         <div class="hero-content">
             <span class="hero-badge" data-i18n="hero.badge">Coming Soon</span>
             <h1 data-i18n="hero.title">Stop confusing luck with strategy</h1>
@@ -91,10 +165,13 @@
                     </div>
                     <div class="confidence-bar">
                         <div class="confidence-fill"></div>
+                        <div class="confidence-pulse"></div>
                     </div>
                     <div class="confidence-label">
                         <span data-i18n="mockup.confidence">Pattern confidence</span>
-                        <span class="confidence-value">67% (+9%)</span>
+                        <span class="confidence-value">
+                            <span class="confidence-percent" data-target="67">0</span>% <span class="confidence-change">(+9%)</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -156,9 +233,9 @@
                         <circle cx="75" cy="60" r="35" stroke="#4a7c7c" stroke-width="3"/>
                     </svg>
                 </div>
-                <div class="section-label" data-i18n="models.label">Dual Intelligence</div>
-                <h2 class="section-title" data-i18n="models.title">Two models. One truth.</h2>
-                <p class="section-subtitle" data-i18n="models.subtitle">Genesis uses two distinct models that work together—one for memory, one for judgement.</p>
+                <div class="section-label" data-i18n="models.label">Dual Core</div>
+                <h2 class="section-title" data-i18n="models.title">Two engines. One truth.</h2>
+                <p class="section-subtitle" data-i18n="models.subtitle">Genesis uses two distinct engines that work together—one for memory, one for judgement.</p>
             </div>
 
             <div class="models-grid">

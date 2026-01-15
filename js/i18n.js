@@ -39,9 +39,9 @@ const translations = {
         'problem.card3.text': 'Everyone has opinions about what\'s working. No one has a framework to verify.',
 
         // Models Section
-        'models.label': 'Dual Intelligence',
-        'models.title': 'Two models. One truth.',
-        'models.subtitle': 'Genesis uses two distinct models that work together—one for memory, one for judgement.',
+        'models.label': 'Dual Core',
+        'models.title': 'Two engines. One truth.',
+        'models.subtitle': 'Genesis uses two distinct engines that work together—one for memory, one for judgement.',
         'models.rim.name': 'RIM',
         'models.rim.title': 'Retrospective Intelligence Model',
         'models.rim.question': '"What patterns exist in what we\'ve done, and which are trustworthy?"',
@@ -152,9 +152,9 @@ const translations = {
         'problem.card3.text': 'Jeder hat Meinungen darüber, was funktioniert. Niemand hat einen Rahmen zur Überprüfung.',
 
         // Models Section
-        'models.label': 'Duale Intelligenz',
-        'models.title': 'Zwei Modelle. Eine Wahrheit.',
-        'models.subtitle': 'Genesis verwendet zwei unterschiedliche Modelle, die zusammenarbeiten — eines für Gedächtnis, eines für Beurteilung.',
+        'models.label': 'Dual Core',
+        'models.title': 'Zwei Engines. Eine Wahrheit.',
+        'models.subtitle': 'Genesis verwendet zwei unterschiedliche Engines, die zusammenarbeiten — eine für Gedächtnis, eine für Beurteilung.',
         'models.rim.name': 'RIM',
         'models.rim.title': 'Retrospektives Intelligenzmodell',
         'models.rim.question': '„Welche Muster existieren in dem, was wir getan haben, und welche sind vertrauenswürdig?"',
@@ -265,9 +265,9 @@ const translations = {
         'problem.card3.text': '何がうまくいっているかについて全員が意見を持っています。検証するフレームワークを持つ人はいません。',
 
         // Models Section
-        'models.label': 'デュアルインテリジェンス',
-        'models.title': '2つのモデル。1つの真実。',
-        'models.subtitle': 'Genesisは、記憶用と判断用の2つの異なるモデルを使用して連携します。',
+        'models.label': 'デュアルコア',
+        'models.title': '2つのエンジン。1つの真実。',
+        'models.subtitle': 'Genesisは、記憶用と判断用の2つの異なるエンジンを使用して連携します。',
         'models.rim.name': 'RIM',
         'models.rim.title': '回顧的インテリジェンスモデル',
         'models.rim.question': '「私たちが行ったことにどのようなパターンが存在し、どれが信頼できるか？」',
