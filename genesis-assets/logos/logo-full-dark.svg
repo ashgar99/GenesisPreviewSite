@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60">
+  <!-- Mark -->
+  <circle cx="30" cy="30" r="28" fill="#1a1d21"/>
+  <text x="30" y="40" font-family="Georgia, serif" font-size="26" font-weight="400" fill="#f8f7f4" text-anchor="middle">G</text>
+  <!-- Wordmark -->
+  <text x="75" y="42" font-family="Georgia, serif" font-size="32" font-weight="400" fill="#1a1d21">Genesis</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1a1d21"/>
+  
+  <!-- Symbol A in background -->
+  <circle cx="400" cy="315" r="150" fill="none" stroke="#2a2d31" stroke-width="3"/>
+  <circle cx="550" cy="315" r="150" fill="none" stroke="#3a6262" stroke-width="3"/>
+  
+  <!-- Content -->
+  <text x="600" y="260" font-family="Georgia, serif" font-size="72" font-weight="400" fill="#f8f7f4" text-anchor="middle">Genesis</text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="28" fill="#9a968f" text-anchor="middle">Decision intelligence for modern teams</text>
+  
+  <!-- Tagline -->
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="22" fill="#4a7c7c" text-anchor="middle">Know why things work, not just that they do.</text>
+</svg>
