@@ -115,8 +115,8 @@ body {
 
 .lang-selector {
     position: fixed;
-    top: 16px;
-    right: 16px;
+    top: 18px;
+    right: 500px;
     z-index: 1001;
 }
 
