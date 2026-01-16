@@ -25,38 +25,38 @@
 </head>
 <body>
 
-    <!-- Language Selector -->
-    <div class="lang-selector">
-        <button class="lang-btn" aria-label="Select language">
-            <span class="lang-current">🇬🇧</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </button>
-        <div class="lang-dropdown">
-            <button class="lang-option active" data-lang="en-GB">
-                <span class="lang-flag">🇬🇧</span>
-                <span>English (UK)</span>
-            </button>
-            <button class="lang-option" data-lang="de">
-                <span class="lang-flag">🇩🇪</span>
-                <span>Deutsch</span>
-            </button>
-            <button class="lang-option" data-lang="ja">
-                <span class="lang-flag">🇯🇵</span>
-                <span>日本語</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#" class="nav-logo">Genesis</a>
+        <a href="index.html" class="nav-logo">Genesis</a>
         <div class="nav-links">
             <a href="#how-it-works" class="nav-link" data-i18n="nav.howItWorks">How it works</a>
             <a href="#what-you-get" class="nav-link" data-i18n="nav.whatYouGet">What you get</a>
-            <a href="#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a>
+            <a href="#features" class="nav-link" data-i18n="nav.features">Features</a>
             <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
+            <a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a>
+            <!-- Language Selector -->
+            <div class="lang-selector">
+                <button class="lang-btn" aria-label="Select language">
+                    <span class="lang-current">🇬🇧</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="lang-dropdown">
+                    <button class="lang-option active" data-lang="en-GB">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English (UK)</span>
+                    </button>
+                    <button class="lang-option" data-lang="de">
+                        <span class="lang-flag">🇩🇪</span>
+                        <span>Deutsch</span>
+                    </button>
+                    <button class="lang-option" data-lang="ja">
+                        <span class="lang-flag">🇯🇵</span>
+                        <span>日本語</span>
+                    </button>
+                </div>
+            </div>
             <a href="#register" class="nav-cta" data-i18n="nav.register">Get your first profile</a>
         </div>
     </nav>
@@ -349,76 +349,134 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
+    <!-- Features Section -->
+    <section class="features-section" id="features">
         <div class="container">
-            <div class="section-label" data-i18n="pricing.label">Pricing</div>
-            <h2 class="section-title" data-i18n="pricing.title">Simple pricing. Clear value.</h2>
+            <div class="section-label" data-i18n="features.label">Genesis Features</div>
+            <h2 class="section-title" data-i18n="features.title">What you get access to</h2>
+            <p class="section-subtitle" data-i18n="features.subtitle">Three tiers of access, each building on the last. Choose what fits your needs.</p>
 
-            <div class="pricing-grid">
-                <div class="pricing-card fade-in stagger-1">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name" data-i18n="pricing.starter.name">Starter</h3>
-                        <div class="pricing-price">
-                            <span class="price-amount">£297</span>
-                            <span class="price-period" data-i18n="pricing.perMonth">/month</span>
+            <div class="tiers-grid">
+                <div class="tier-card fade-in stagger-1">
+                    <div class="tier-header">
+                        <div class="tier-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
                         </div>
-                        <p class="pricing-description" data-i18n="pricing.starter.description">For solo founders and small teams getting started with intent-driven content.</p>
+                        <h3 class="tier-name" data-i18n="features.core.name">Core</h3>
+                        <p class="tier-tagline" data-i18n="features.core.tagline">The foundation</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.starter.feature1">Monthly Genesis Profile</li>
-                        <li data-i18n="pricing.starter.feature2">Pattern analysis for up to 30 posts/month</li>
-                        <li data-i18n="pricing.starter.feature3">PDF export</li>
-                        <li data-i18n="pricing.starter.feature4">Email delivery</li>
-                        <li data-i18n="pricing.starter.feature5">Email support</li>
+                    <ul class="tier-features">
+                        <li>
+                            <span class="feature-name">Genesis Profile</span>
+                            <span class="feature-desc">Monthly analysis of your LinkedIn content</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Verdict System</span>
+                            <span class="feature-desc">Pass, Fail, Coincidence, Uncertain classifications</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Intent Declaration</span>
+                            <span class="feature-desc">Define what success looks like for you</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Basic Pattern Recognition</span>
+                            <span class="feature-desc">Identify what's consistently working</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Email Delivery</span>
+                            <span class="feature-desc">Profiles delivered to your inbox</span>
+                        </li>
                     </ul>
-                    <a href="#register" class="btn btn-secondary pricing-cta" data-i18n="pricing.starter.cta">Start with Starter</a>
                 </div>
 
-                <div class="pricing-card featured fade-in stagger-2">
-                    <div class="pricing-badge" data-i18n="pricing.popular">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-name" data-i18n="pricing.growth.name">Growth</h3>
-                        <div class="pricing-price">
-                            <span class="price-amount">£597</span>
-                            <span class="price-period" data-i18n="pricing.perMonth">/month</span>
+                <div class="tier-card featured fade-in stagger-2">
+                    <div class="tier-badge">Most Complete</div>
+                    <div class="tier-header">
+                        <div class="tier-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
                         </div>
-                        <p class="pricing-description" data-i18n="pricing.growth.description">For marketing leads and growing teams who need deeper analysis and flexibility.</p>
+                        <h3 class="tier-name" data-i18n="features.advanced.name">Advanced</h3>
+                        <p class="tier-tagline" data-i18n="features.advanced.tagline">Everything in Core, plus</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.growth.feature1">Bi-weekly Genesis Profile</li>
-                        <li data-i18n="pricing.growth.feature2">Pattern analysis for up to 100 posts/month</li>
-                        <li data-i18n="pricing.growth.feature3">5 on-demand queries per month</li>
-                        <li data-i18n="pricing.growth.feature4">PDF and CSV export</li>
-                        <li data-i18n="pricing.growth.feature5">Email or Slack delivery</li>
-                        <li data-i18n="pricing.growth.feature6">Priority email support</li>
+                    <ul class="tier-features">
+                        <li>
+                            <span class="feature-name">Bi-weekly Profiles</span>
+                            <span class="feature-desc">More frequent analysis cycles</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Deep Pattern Analysis</span>
+                            <span class="feature-desc">Advanced pattern recognition across your content</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Alignment Score</span>
+                            <span class="feature-desc">Track how well results match your intent over time</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Reasoning Traces</span>
+                            <span class="feature-desc">See exactly why each verdict was assigned</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">On-demand Queries</span>
+                            <span class="feature-desc">Ask specific questions about your content</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Slack Integration</span>
+                            <span class="feature-desc">Profiles delivered where you work</span>
+                        </li>
                     </ul>
-                    <a href="#register" class="btn btn-primary pricing-cta" data-i18n="pricing.growth.cta">Choose Growth</a>
                 </div>
 
-                <div class="pricing-card fade-in stagger-3">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name" data-i18n="pricing.scale.name">Scale</h3>
-                        <div class="pricing-price">
-                            <span class="price-amount">£1,197</span>
-                            <span class="price-period" data-i18n="pricing.perMonth">/month</span>
+                <div class="tier-card fade-in stagger-3">
+                    <div class="tier-header">
+                        <div class="tier-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
                         </div>
-                        <p class="pricing-description" data-i18n="pricing.scale.description">For agencies and larger teams managing significant content operations.</p>
+                        <h3 class="tier-name" data-i18n="features.enterprise.name">Enterprise</h3>
+                        <p class="tier-tagline" data-i18n="features.enterprise.tagline">Everything in Advanced, plus</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.scale.feature1">Weekly Genesis Profile</li>
-                        <li data-i18n="pricing.scale.feature2">Pattern analysis for unlimited posts</li>
-                        <li data-i18n="pricing.scale.feature3">15 on-demand queries per month</li>
-                        <li data-i18n="pricing.scale.feature4">Full data export (PDF, CSV, JSON)</li>
-                        <li data-i18n="pricing.scale.feature5">Email, Slack, or API delivery</li>
-                        <li data-i18n="pricing.scale.feature6">Dedicated support contact</li>
-                        <li data-i18n="pricing.scale.feature7">Custom intent frameworks</li>
+                    <ul class="tier-features">
+                        <li>
+                            <span class="feature-name">Weekly Profiles</span>
+                            <span class="feature-desc">Real-time strategy feedback</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Custom Intent Frameworks</span>
+                            <span class="feature-desc">Tailored success criteria for your business</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Multi-account Analysis</span>
+                            <span class="feature-desc">Manage multiple LinkedIn presences</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">API Access</span>
+                            <span class="feature-desc">Integrate Genesis data into your systems</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Full Data Export</span>
+                            <span class="feature-desc">PDF, CSV, and JSON formats</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Dedicated Support</span>
+                            <span class="feature-desc">Direct line to the Genesis team</span>
+                        </li>
                     </ul>
-                    <a href="#register" class="btn btn-secondary pricing-cta" data-i18n="pricing.scale.cta">Contact for Scale</a>
                 </div>
             </div>
 
-            <p class="pricing-note" data-i18n="pricing.note">All plans include a 14-day evaluation period. Cancel anytime with 30 days notice.</p>
+            <div class="features-cta">
+                <p class="features-note" data-i18n="features.note">Ready to see which tier fits your needs?</p>
+                <a href="#register" class="btn btn-primary" data-i18n="features.cta">Get early access</a>
+            </div>
         </div>
     </section>
 
@@ -505,7 +563,7 @@
                     <ul class="footer-links">
                         <li><a href="#how-it-works" data-i18n="nav.howItWorks">How it works</a></li>
                         <li><a href="#what-you-get" data-i18n="nav.whatYouGet">What you get</a></li>
-                        <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Features</a></li>
                         <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
                     </ul>
                 </div>
@@ -514,18 +572,17 @@
                     <h4 data-i18n="footer.company">Company</h4>
                     <ul class="footer-links">
                         <li><a href="#" data-i18n="footer.about">About</a></li>
-                        <li><a href="#" data-i18n="footer.blog">Blog</a></li>
-                        <li><a href="#" data-i18n="footer.careers">Careers</a></li>
-                        <li><a href="#" data-i18n="footer.contact">Contact</a></li>
+                        <li><a href="blog.html" data-i18n="footer.blog">Blog</a></li>
+                        <li><a href="#register" data-i18n="footer.contact">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h4 data-i18n="footer.legal">Legal</h4>
                     <ul class="footer-links">
-                        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
-                        <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
-                        <li><a href="#" data-i18n="footer.cookies">Cookie Policy</a></li>
+                        <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
+                        <li><a href="cookies.html" data-i18n="footer.cookies">Cookie Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -533,9 +590,9 @@
             <div class="footer-bottom">
                 <p class="footer-copyright">© <span data-i18n="footer.copyright">2026 Genesis. All rights reserved.</span></p>
                 <div class="footer-legal">
-                    <a href="#" data-i18n="footer.privacy">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Cookies</a>
+                    <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="cookies.html">Cookies</a>
                 </div>
             </div>
         </div>
