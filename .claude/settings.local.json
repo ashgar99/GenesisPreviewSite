@@ -7,7 +7,9 @@
       "Bash(git push:*)",
       "Bash(git fetch:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nRewrite homepage copy and add legal documentation\n\n- Replace \"luck vs strategy\" framing with \"right reasons\" messaging\n- Remove exposed internal model names \\(RIM/IEM\\)\n- Add How It Works \\(3-step process\\), Pricing, and FAQ sections\n- Replace Verdicts section with Who It''s For personas\n- Update navigation and footer links\n- Add homepage-copy.md, privacy-policy.md, data-processing-agreement.md, and security-policy.md\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nRewrite homepage copy and add legal documentation\n\n- Replace \"luck vs strategy\" framing with \"right reasons\" messaging\n- Remove exposed internal model names \\(RIM/IEM\\)\n- Add How It Works \\(3-step process\\), Pricing, and FAQ sections\n- Replace Verdicts section with Who It''s For personas\n- Update navigation and footer links\n- Add homepage-copy.md, privacy-policy.md, data-processing-agreement.md, and security-policy.md\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(wc:*)",
+      "Bash(ls:*)"
     ]
   }
 }
