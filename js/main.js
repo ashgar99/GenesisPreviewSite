@@ -123,7 +123,7 @@
     // ==================== //
 
     // API endpoint - update this after deploying to Vercel
-    const API_ENDPOINT = 'https://genesis-api.vercel.app/api/register-interest';
+    const API_ENDPOINT = 'https://genesis-preview-site-ae9wgq60t-genesis-projects-c0b6001a.vercel.app/api/register-interest';
 
     // Get UTM parameters from URL
     function getUtmParams() {
