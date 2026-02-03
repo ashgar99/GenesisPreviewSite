@@ -1,0 +1,17 @@
+// Section components barrel export
+export { HeroPrimary } from './HeroPrimary';
+export { HeroSecondary } from './HeroSecondary';
+export { TrustStrip } from './TrustStrip';
+export { ProblemSection } from './ProblemSection';
+export { SolutionOverview } from './SolutionOverview';
+export { HowItWorks } from './HowItWorks';
+export { FeatureGrid } from './FeatureGrid';
+export { OutcomesMetrics } from './OutcomesMetrics';
+export { PersonaCards } from './PersonaCards';
+export { MethodologySection } from './MethodologySection';
+export { CaseStudyTeaser } from './CaseStudyTeaser';
+export { SecurityTrust } from './SecurityTrust';
+export { ComparisonTable } from './ComparisonTable';
+export { ResourcesTeaser } from './ResourcesTeaser';
+export { FAQ } from './FAQ';
+export { FinalCTA } from './FinalCTA';

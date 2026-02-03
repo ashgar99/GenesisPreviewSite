@@ -13,7 +13,7 @@
 }
 
 .blog-header h1 {
-    font-family: var(--font-display);
+    font-family: var(--display);
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 400;
     color: var(--cream);
@@ -142,7 +142,7 @@
 }
 
 .blog-card-title {
-    font-family: var(--font-display);
+    font-family: var(--display);
     font-size: 1.25rem;
     font-weight: 500;
     color: var(--charcoal);
@@ -185,7 +185,7 @@
 }
 
 .blog-newsletter h2 {
-    font-family: var(--font-display);
+    font-family: var(--display);
     font-size: 2rem;
     font-weight: 400;
     color: var(--cream);
@@ -215,7 +215,7 @@
     background: rgba(248, 247, 244, 0.1);
     color: var(--cream);
     font-size: 1rem;
-    font-family: var(--font-body);
+    font-family: var(--body);
     transition: border-color 0.2s ease, background 0.2s ease;
 }
 
@@ -237,7 +237,7 @@
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
-    font-family: var(--font-body);
+    font-family: var(--body);
     cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease;
 }
