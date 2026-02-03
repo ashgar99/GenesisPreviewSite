@@ -122,22 +122,107 @@
     // FORM HANDLING        //
     // ==================== //
 
-    function initFormHandling() {
-        const form = document.querySelector('.cta-form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const emailInput = this.querySelector('.cta-input');
-                const email = emailInput.value;
+    // API endpoint - update this after deploying to Vercel
+    const API_ENDPOINT = 'https://genesis-preview-site-ae9wgq60t-genesis-projects-c0b6001a.vercel.app/api/register-interest';
 
-                // Get translated success message
-                const successMsg = typeof i18n !== 'undefined'
-                    ? i18n.t('cta.success')
-                    : 'Thanks for registering! We\'ll be in touch at';
+    // Get UTM parameters from URL
+    function getUtmParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            utmSource: params.get('utm_source') || '',
+            utmMedium: params.get('utm_medium') || '',
+            utmCampaign: params.get('utm_campaign') || ''
+        };
+    }
 
-                alert(`${successMsg} ${email}`);
-                this.reset();
+    // Show form feedback message
+    function showFeedback(form, message, isSuccess) {
+        const feedback = form.parentElement.querySelector('.form-feedback');
+        if (feedback) {
+            feedback.textContent = message;
+            feedback.className = 'form-feedback ' + (isSuccess ? 'form-feedback--success' : 'form-feedback--error');
+            feedback.style.display = 'block';
+        }
+    }
+
+    // Hide form feedback
+    function hideFeedback(form) {
+        const feedback = form.parentElement.querySelector('.form-feedback');
+        if (feedback) {
+            feedback.style.display = 'none';
+        }
+    }
+
+    // Handle form submission
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const emailInput = form.querySelector('input[type="email"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const email = emailInput.value;
+
+        // Store original button text
+        const originalText = submitBtn.textContent;
+
+        // Set loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = typeof i18n !== 'undefined' ? i18n.t('cta.loading') || 'Submitting...' : 'Submitting...';
+        hideFeedback(form);
+
+        // Determine source based on form class
+        const source = form.classList.contains('blog-newsletter-form')
+            ? 'blog-newsletter'
+            : 'get-your-first-profile';
+
+        try {
+            const response = await fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    source,
+                    ...getUtmParams()
+                })
             });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                // Success
+                const successMsg = typeof i18n !== 'undefined'
+                    ? i18n.t('cta.success') || 'Thanks! Check your inbox for confirmation.'
+                    : 'Thanks! Check your inbox for confirmation.';
+                showFeedback(form, successMsg, true);
+                form.reset();
+            } else {
+                // API returned an error
+                throw new Error(data.error || 'Submission failed');
+            }
+        } catch (error) {
+            // Network or other error
+            const errorMsg = typeof i18n !== 'undefined'
+                ? i18n.t('cta.error') || 'Something went wrong. Please try again.'
+                : 'Something went wrong. Please try again.';
+            showFeedback(form, errorMsg, false);
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    }
+
+    function initFormHandling() {
+        // Main CTA form
+        const ctaForm = document.querySelector('.cta-form');
+        if (ctaForm) {
+            ctaForm.addEventListener('submit', handleFormSubmit);
+        }
+
+        // Blog newsletter form
+        const blogForm = document.querySelector('.blog-newsletter-form');
+        if (blogForm) {
+            blogForm.addEventListener('submit', handleFormSubmit);
         }
     }
 

@@ -112,7 +112,9 @@ const translations = {
         'cta.placeholder': 'Enter your email',
         'cta.button': 'Get your first profile',
         'cta.note': '14-day evaluation period. No credit card required to start.',
-        'cta.success': 'Thanks for registering! We\'ll be in touch at',
+        'cta.loading': 'Submitting...',
+        'cta.success': 'Thanks! Check your inbox for confirmation.',
+        'cta.error': 'Something went wrong. Please try again.',
 
         // Footer
         'footer.tagline': 'Decision intelligence for LinkedIn marketing. Know which posts worked—and why.',
@@ -241,7 +243,9 @@ const translations = {
         'cta.placeholder': 'E-Mail eingeben',
         'cta.button': 'Erstes Profil erhalten',
         'cta.note': '14-tägige Evaluierungsphase. Keine Kreditkarte erforderlich.',
-        'cta.success': 'Danke für Ihre Anmeldung! Wir melden uns bei',
+        'cta.loading': 'Wird gesendet...',
+        'cta.success': 'Danke! Prüfen Sie Ihren Posteingang.',
+        'cta.error': 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
 
         // Footer
         'footer.tagline': 'Entscheidungsintelligenz für LinkedIn-Marketing. Wissen, welche Beiträge funktioniert haben—und warum.',
@@ -370,7 +374,9 @@ const translations = {
         'cta.placeholder': 'メールアドレスを入力',
         'cta.button': '最初のプロファイルを取得',
         'cta.note': '14日間の評価期間。開始にクレジットカードは必要ありません。',
-        'cta.success': '登録ありがとうございます！こちらにご連絡します：',
+        'cta.loading': '送信中...',
+        'cta.success': 'ありがとうございます！受信トレイをご確認ください。',
+        'cta.error': '問題が発生しました。もう一度お試しください。',
 
         // Footer
         'footer.tagline': 'LinkedInマーケティングのための意思決定インテリジェンス。どの投稿が効果的だったか—そしてその理由を知る。',
