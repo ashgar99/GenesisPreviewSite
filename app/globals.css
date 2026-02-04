@@ -90,20 +90,30 @@ body {
   outline-offset: 2px;
 }
 
-/* Skip link for keyboard navigation */
+/* Skip link for keyboard navigation - visually hidden until focused */
 .skip-link {
   position: absolute;
-  left: -9999px;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: var(--color-neutral-900);
   color: white;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: top 0.2s ease, opacity 0.2s ease;
 }
 
 .skip-link:focus {
-  left: 50%;
-  transform: translateX(-50%);
   top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
 }
 
 /* ===================================
@@ -166,22 +176,80 @@ body {
    ANIMATION UTILITIES
    =================================== */
 
+/* Scroll animations - elements fade in when they enter viewport */
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity var(--duration-slow) var(--easing-default),
-              transform var(--duration-slow) var(--easing-default);
-}
-
-.animate-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-on-scroll {
+/* Only animate if user hasn't disabled motion AND browser supports IntersectionObserver */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-on-scroll {
+      animation: scrollFadeIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
+
+@keyframes scrollFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
+  }
+}
+
+/* Slide-in animations for scroll */
+.animate-slide-in-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-slide-in-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-slide-in-left {
+      animation: slideInLeft 0.6s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    .animate-slide-in-right {
+      animation: slideInRight 0.6s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -230,4 +298,62 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-neutral-400);
+}
+
+/* ===================================
+   CUSTOM SELECT DROPDOWN
+   =================================== */
+
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem;
+}
+
+/* ===================================
+   HIDE SCROLLBAR UTILITY
+   =================================== */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===================================
+   LINE CLAMP UTILITIES
+   =================================== */
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===================================
+   ANIMATION PAUSE TOGGLE
+   =================================== */
+
+.animations-paused *,
+.animations-paused *::before,
+.animations-paused *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+.animations-paused .animate-bounce,
+.animations-paused .animate-marquee,
+.animations-paused .animate-fade-in,
+.animations-paused .animate-slide-up,
+.animations-paused .animate-slide-in-left,
+.animations-paused .animate-slide-in-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }

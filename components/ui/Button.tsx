@@ -17,28 +17,28 @@ interface ButtonProps {
 
 const variantClasses = {
   primary: clsx(
-    'bg-neutral-900 text-white',
-    'hover:bg-neutral-800',
-    'focus-visible:ring-neutral-900',
-    'disabled:bg-neutral-300 disabled:text-neutral-500'
+    'bg-neutral-900 text-white border-2 border-neutral-900',
+    'hover:bg-neutral-800 hover:border-neutral-800',
+    'focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2',
+    'disabled:bg-neutral-300 disabled:border-neutral-300 disabled:text-neutral-500'
   ),
   secondary: clsx(
     'bg-transparent text-neutral-900 border-2 border-neutral-300',
-    'hover:border-neutral-900 hover:bg-white',
-    'focus-visible:ring-neutral-900',
+    'hover:border-neutral-900 hover:bg-neutral-900 hover:text-white',
+    'focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2',
     'disabled:border-neutral-200 disabled:text-neutral-400'
   ),
   ghost: clsx(
-    'bg-transparent text-neutral-700',
-    'hover:bg-neutral-100 hover:text-neutral-900',
-    'focus-visible:ring-neutral-500',
+    'bg-transparent text-neutral-700 border-2 border-transparent',
+    'hover:text-neutral-900 hover:underline hover:underline-offset-4',
+    'focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2',
     'disabled:text-neutral-400'
   ),
   brand: clsx(
-    'bg-brand-500 text-white',
-    'hover:bg-brand-600',
-    'focus-visible:ring-brand-500',
-    'disabled:bg-brand-200'
+    'bg-brand-500 text-white border-2 border-brand-500',
+    'hover:bg-brand-600 hover:border-brand-600',
+    'focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2',
+    'disabled:bg-brand-200 disabled:border-brand-200'
   ),
 };
 
@@ -63,7 +63,7 @@ export function Button({
   const baseClasses = clsx(
     'inline-flex items-center gap-2 font-semibold rounded-lg',
     'transition-all duration-fast',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+    'focus-visible:outline-none',
     'disabled:cursor-not-allowed',
     variantClasses[variant],
     sizeClasses[size],

@@ -12,6 +12,7 @@ interface CaseStudy {
   outcome: string;
   href: string;
   logo?: string;
+  image?: string;
   isPlaceholder?: boolean;
 }
 
@@ -94,20 +95,26 @@ export function CaseStudyTeaser({
                   </span>
                 </div>
 
-                {/* Placeholder for screenshot/visual */}
+                {/* Visual/Image */}
                 <div
                   className={clsx(
-                    'aspect-video rounded-lg',
+                    'aspect-video rounded-lg overflow-hidden',
                     featured.isPlaceholder
                       ? 'bg-neutral-200 flex items-center justify-center'
-                      : 'bg-neutral-200'
+                      : featured.image ? '' : 'bg-neutral-200'
                   )}
                 >
-                  {featured.isPlaceholder && (
+                  {featured.image ? (
+                    <img
+                      src={featured.image}
+                      alt={featured.company}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : featured.isPlaceholder ? (
                     <span className="text-neutral-400 text-body-sm">
                       [Case study visual]
                     </span>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </Link>

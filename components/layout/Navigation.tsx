@@ -9,18 +9,26 @@ import { Logo } from '@/components/ui/Logo';
 
 const navigation = {
   main: [
-    { name: 'Platform', href: '/platform' },
+    {
+      name: 'Product',
+      href: '/platform',
+      children: [
+        { name: 'Platform Overview', href: '/platform' },
+        { name: 'Example Profile', href: '/outputs' },
+        { name: 'How It Works', href: '/#how-it-works' },
+        { name: 'Pricing', href: '/pricing' },
+      ],
+    },
     {
       name: 'Solutions',
       href: '/solutions',
       children: [
-        { name: 'For Marketing Leaders', href: '/solutions/marketing-leaders' },
-        { name: 'For Founders', href: '/solutions/founders' },
-        { name: 'For Agencies', href: '/solutions/agencies' },
+        { name: 'For Marketing Leaders', href: '/solutions#marketing-leaders' },
+        { name: 'For Founders', href: '/solutions#founders' },
+        { name: 'For Agencies', href: '/solutions#agencies' },
       ],
     },
     { name: 'Case Studies', href: '/case-studies' },
-    { name: 'Pricing', href: '/pricing' },
     { name: 'Resources', href: '/resources' },
     { name: 'Company', href: '/company' },
   ],
@@ -159,8 +167,8 @@ export function Navigation() {
             ))}
           </ul>
 
-          <Button href="/contact" variant="primary" size="sm">
-            Book a Demo
+          <Button href="/contact?source=nav-cta" variant="primary" size="sm">
+            Contact Us
           </Button>
         </div>
 
@@ -262,13 +270,13 @@ export function Navigation() {
 
           <div className="mt-8 px-4">
             <Button
-              href="/contact"
+              href="/contact?source=mobile-nav-cta"
               variant="primary"
               size="lg"
               className="w-full justify-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Book a Demo
+              Contact Us
             </Button>
           </div>
         </nav>

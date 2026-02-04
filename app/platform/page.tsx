@@ -1,21 +1,22 @@
 import { Metadata } from 'next';
 import {
   HeroSecondary,
-  FeatureGrid,
   ComparisonTable,
   SecurityTrust,
   FAQ,
   FinalCTA,
+  TechnicalDetails,
 } from '@/components/sections';
 import { Container } from '@/components/layout/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { VerdictCard } from '@/components/ui/VerdictBadge';
+import { HoverTiltCard } from '@/components/ui/HoverTiltCard';
 import { clsx } from 'clsx';
 
 export const metadata: Metadata = {
   title: 'Platform',
   description:
-    'Learn how Genesis analyses your LinkedIn content against your declared goals to show you whether results came from strategy or something else.',
+    'Learn how Genesis analyses your content against declared goals to separate strategic wins from coincidental ones. Only verified learnings reinforce your strategy.',
 };
 
 // Feature narrative section
@@ -147,25 +148,25 @@ function VerdictSystemSection() {
       type: 'pass' as const,
       title: 'Pass',
       description:
-        'Success by design. The content performed well AND it performed well for the reasons you intended.',
+        'Success by design. The content performed well and our analysis indicates the results align with your stated intent.',
     },
     {
       type: 'fail' as const,
       title: 'Fail',
       description:
-        'Clean miss. The content underperformed because the approach wasn\'t right. Learn from it and adjust.',
+        'Clear miss. The content underperformed and our analysis identifies gaps between execution and intent.',
     },
     {
       type: 'coincidence' as const,
       title: 'Coincidence',
       description:
-        'Success by accident. The content performed well BUT not for the reasons you intended. Don\'t repeat blindly.',
+        'Likely circumstantial. The content performed well but our analysis suggests insufficient evidence that intent drove the outcome.',
     },
     {
       type: 'uncertain' as const,
       title: 'Uncertain',
       description:
-        'Insufficient data. More time or more content needed before Genesis can confidently assign a verdict.',
+        'Insufficient data. More time or content needed before Genesis can confidently assign a verdict.',
     },
   ];
 
@@ -197,46 +198,20 @@ function VerdictSystemSection() {
 }
 
 const comparisonData = {
-  headline: 'Genesis vs. traditional analytics',
-  columns: ['Genesis', 'LinkedIn Analytics', 'Generic Tools'],
+  headline: 'Genesis vs. other analytics tools',
+  columns: ['Genesis', 'LinkedIn Analytics', 'Shield Analytics', 'Hootsuite'],
   rows: [
-    { feature: 'Shows what happened', values: [true, true, true] },
-    { feature: 'Explains why it happened', values: [true, false, false] },
-    { feature: 'Compares to your intent', values: [true, false, false] },
-    { feature: 'Identifies repeatable patterns', values: [true, 'partial', false] },
-    { feature: 'Distinguishes luck from strategy', values: [true, false, false] },
-    { feature: 'Provides actionable verdicts', values: [true, false, 'partial'] },
+    { feature: 'Shows what happened', values: [true, true, true, true] },
+    { feature: 'Explains why it happened', values: [true, false, false, false] },
+    { feature: 'Compares to your declared intent', values: [true, false, false, false] },
+    { feature: 'Identifies repeatable patterns', values: [true, 'partial', 'partial', 'partial'] },
+    { feature: 'Distinguishes strategy from luck', values: [true, false, false, false] },
+    { feature: 'Provides actionable verdicts', values: [true, false, 'partial', 'partial'] },
+    { feature: 'Full reasoning traces', values: [true, false, false, false] },
   ],
   highlightColumn: 0,
 };
 
-const technicalFeatures = {
-  label: 'Technical Details',
-  headline: 'Built for how you work',
-  subheadline: 'Genesis fits into your existing workflow without complex integrations.',
-  features: [
-    {
-      icon: 'file' as const,
-      title: 'Simple data input',
-      description: 'Upload CSV or XLSX exports from LinkedIn. No API connections needed.',
-    },
-    {
-      icon: 'clock' as const,
-      title: 'Flexible delivery',
-      description: 'Receive profiles via email or Slack on your preferred schedule.',
-    },
-    {
-      icon: 'zap' as const,
-      title: 'On-demand queries',
-      description: 'Ask specific questions about your content between scheduled profiles.',
-    },
-    {
-      icon: 'layers' as const,
-      title: 'Export formats',
-      description: 'Get your data in PDF, CSV, or JSON for integration with other tools.',
-    },
-  ],
-};
 
 const platformFAQ = {
   headline: 'Platform questions',
@@ -244,7 +219,7 @@ const platformFAQ = {
     {
       question: 'How much data do I need?',
       answer:
-        'Genesis works best with at least 3 months of LinkedIn activity, but can provide initial insights with as little as 1 month of data.',
+        'Genesis works best with at least 3 months of content activity, but can provide initial insights with as little as 1 month of data.',
     },
     {
       question: 'How often are profiles generated?',
@@ -252,14 +227,19 @@ const platformFAQ = {
         'Depending on your plan: monthly (Core), bi-weekly (Advanced), or weekly (Enterprise). You can also request on-demand analysis.',
     },
     {
-      question: 'Can I use Genesis for multiple LinkedIn profiles?',
+      question: 'Can I use Genesis for multiple content sources?',
       answer:
-        'Yes. Enterprise plans support multi-account analysis, allowing you to manage multiple LinkedIn presences from one dashboard.',
+        'Yes. Enterprise plans support multi-account analysis, allowing you to manage multiple content presences from one dashboard.',
     },
     {
       question: 'What if my goals change?',
       answer:
         'You can update your declared intent at any time. Future profiles will be analysed against your new goals.',
+    },
+    {
+      question: 'What happens when content succeeds by luck?',
+      answer:
+        'Genesis marks it as Coincidence and blocks it from reinforcing your strategy. You can recalibrate the intent or exclude it entirely—preventing lucky outcomes from corrupting future decisions.',
     },
   ],
 };
@@ -269,22 +249,23 @@ export default function PlatformPage() {
     <>
       <HeroSecondary
         label="Platform"
-        headline="Decision intelligence for LinkedIn marketing"
-        subheadline="Understand why your content performs the way it does. Make decisions based on evidence, not assumptions."
+        headline="Luck does not reinforce strategy"
+        subheadline="Genesis blocks coincidental wins from corrupting your decision-making. Only verified successes and clean failures shape future strategy."
         cta={{
-          text: 'Request a demo',
-          href: '/contact',
+          text: 'Contact us',
+          href: '/contact?reason=platform',
         }}
+        videoSrc="/videos/platform-bg.mp4"
       />
 
       <CoreConceptSection />
 
       <FeatureNarrative
         label="The Genesis Profile"
-        headline="Your monthly strategy checkpoint"
+        headline="Your strategy checkpoint"
         description={[
-          'Every month, Genesis delivers a comprehensive analysis of your LinkedIn content. It examines each post against your declared intent and assigns a verdict.',
-          'You\'ll see exactly which content succeeded for the right reasons, which failed cleanly, which succeeded by accident, and which needs more data.',
+          'Each cycle, Genesis delivers a comprehensive analysis of your content. It examines each piece against your declared intent and assigns a verdict.',
+          'Only passes and clean failures reinforce your strategy. Coincidental wins are blocked until you recalibrate—preventing luck from corrupting your decisions.',
         ]}
         imagePosition="right"
       >
@@ -325,48 +306,46 @@ export default function PlatformPage() {
         ]}
         imagePosition="left"
       >
-        <div className="bg-neutral-100 rounded-xl p-6">
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg p-4 border-l-4 border-success-500">
-              <div className="font-semibold text-neutral-900 mb-1">Winning pattern</div>
-              <div className="text-body-sm text-neutral-600">
-                Educational content with specific examples performs 3× better for thought leadership goals
+        <HoverTiltCard className="rounded-xl overflow-hidden">
+          <div className="bg-neutral-100 rounded-xl p-6">
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg p-4 border-l-4 border-success-500 shadow-sm">
+                <div className="font-semibold text-neutral-900 mb-1">Winning pattern</div>
+                <div className="text-body-sm text-neutral-600">
+                  Educational content with specific examples performs 3× better for thought leadership goals
+                </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg p-4 border-l-4 border-error-500">
-              <div className="font-semibold text-neutral-900 mb-1">Pattern to avoid</div>
-              <div className="text-body-sm text-neutral-600">
-                Generic industry news shares rarely align with brand differentiation intent
+              <div className="bg-white rounded-lg p-4 border-l-4 border-error-500 shadow-sm">
+                <div className="font-semibold text-neutral-900 mb-1">Pattern to avoid</div>
+                <div className="text-body-sm text-neutral-600">
+                  Generic industry news shares rarely align with brand differentiation intent
+                </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg p-4 border-l-4 border-warning-500">
-              <div className="font-semibold text-neutral-900 mb-1">Needs investigation</div>
-              <div className="text-body-sm text-neutral-600">
-                Personal stories get high engagement but unclear alignment with B2B goals
+              <div className="bg-white rounded-lg p-4 border-l-4 border-warning-500 shadow-sm">
+                <div className="font-semibold text-neutral-900 mb-1">Needs investigation</div>
+                <div className="text-body-sm text-neutral-600">
+                  Personal stories get high engagement but unclear alignment with B2B goals
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </HoverTiltCard>
       </FeatureNarrative>
 
       <VerdictSystemSection />
 
       <ComparisonTable {...comparisonData} />
 
-      <FeatureGrid
-        {...technicalFeatures}
-        variant="light"
-        columns={4}
-      />
+      <TechnicalDetails />
 
       <FAQ {...platformFAQ} variant="accordion" />
 
       <FinalCTA
         headline="See Genesis in action"
-        subheadline="Book a demo to see how Genesis can transform your LinkedIn strategy."
+        subheadline="Get in touch to see how Genesis can bring clarity to your content strategy."
         showForm={false}
-        buttonText="Request a demo"
-        buttonHref="/contact"
+        buttonText="Contact Us"
+        buttonHref="/contact?source=platform-footer-cta"
         variant="dark"
       />
     </>

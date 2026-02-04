@@ -1,10 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import { Logo } from '@/components/ui/Logo';
+import { useAnimations } from '@/contexts/AnimationContext';
 
 const footerLinks = {
   product: {
     title: 'Product',
     links: [
+    
       { name: 'Platform', href: '/platform' },
       { name: 'Pricing', href: '/pricing' },
       { name: 'Case Studies', href: '/case-studies' },
@@ -14,9 +18,9 @@ const footerLinks = {
   solutions: {
     title: 'Solutions',
     links: [
-      { name: 'For Marketing Leaders', href: '/solutions/marketing-leaders' },
-      { name: 'For Founders', href: '/solutions/founders' },
-      { name: 'For Agencies', href: '/solutions/agencies' },
+      { name: 'For Marketing Leaders', href: '/solutions#marketing-leaders' },
+      { name: 'For Founders', href: '/solutions#founders' },
+      { name: 'For Agencies', href: '/solutions#agencies' },
     ],
   },
   company: {
@@ -60,6 +64,7 @@ const socialLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { animationsEnabled, toggleAnimations } = useAnimations();
 
   return (
     <footer className="bg-neutral-900 text-neutral-50">
@@ -72,8 +77,7 @@ export function Footer() {
               <Logo variant="light" className="h-8 w-auto" />
             </Link>
             <p className="text-body-sm text-neutral-400 max-w-xs mb-6">
-              Decision intelligence for LinkedIn marketing. Know which posts
-              worked—and why.
+              Decision intelligence for content marketing. Know what worked—and why.
             </p>
 
             {/* Social links */}
@@ -121,16 +125,27 @@ export function Footer() {
             © {currentYear} Genesis. All rights reserved.
           </p>
 
-          {/* Trust statement */}
-          <p className="text-caption text-neutral-600">
-            Your data is encrypted and never sold.{' '}
-            <Link
-              href="/legal/privacy"
-              className="text-neutral-500 hover:text-neutral-400 underline underline-offset-2"
+          <div className="flex items-center gap-6">
+            {/* Pause animations button */}
+            <button
+              onClick={toggleAnimations}
+              className="text-caption text-neutral-500 hover:text-neutral-400 transition-colors"
+              aria-label={animationsEnabled ? 'Pause animations' : 'Resume animations'}
             >
-              Learn more
-            </Link>
-          </p>
+              {animationsEnabled ? 'Pause animations' : 'Resume animations'}
+            </button>
+
+            {/* Trust statement */}
+            <p className="text-caption text-neutral-600">
+              Your data is encrypted and never sold.{' '}
+              <Link
+                href="/legal/privacy"
+                className="text-neutral-500 hover:text-neutral-400 underline underline-offset-2"
+              >
+                Learn more
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
