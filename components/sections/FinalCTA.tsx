@@ -21,15 +21,16 @@ export function FinalCTA({
   headline,
   subheadline,
   showForm = true,
-  formPlaceholder = 'Enter your email',
-  buttonText = 'Get started',
+  formPlaceholder = 'Enter your work email',
+  buttonText = 'Contact us',
   note,
   variant = 'dark',
-  buttonHref = '/contact',
+  buttonHref = '/contact?reason=general',
 }: FinalCTAProps) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const isDark = variant === 'dark';
 
@@ -38,13 +39,46 @@ export function FinalCTA({
     if (!email) return;
 
     setIsSubmitting(true);
+    setError(null);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const submissionData = {
+        firstName: '',
+        surname: '',
+        email: email,
+        companySector: '',
+        concern: 'General Enquiry',
+        interest: 'Contact Request',
+        notes: 'Submitted via footer CTA form',
+        timestamp: new Date().toISOString(),
+        source: 'footer-cta',
+        utmSource: '',
+        utmMedium: '',
+        utmCampaign: '',
+        status: 'pending',
+      };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setEmail('');
+      const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || '';
+
+      if (GOOGLE_SCRIPT_URL) {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submissionData),
+        });
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setEmail('');
+    } catch (err) {
+      setIsSubmitting(false);
+      setError('Something went wrong. Please try again.');
+      console.error('Form submission error:', err);
+    }
   };
 
   return (
@@ -134,7 +168,13 @@ export function FinalCTA({
             </Button>
           )}
 
-          {note && (
+          {error && (
+            <p className={clsx('text-body-sm mt-4', isDark ? 'text-error-400' : 'text-error-500')}>
+              {error}
+            </p>
+          )}
+
+          {note && !isSubmitted && (
             <p
               className={clsx(
                 'text-body-sm mt-6',

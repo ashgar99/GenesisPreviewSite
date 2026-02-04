@@ -3,7 +3,7 @@ import { Container } from '@/components/layout/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { Button } from '@/components/ui/Button';
 import { FAQ, FinalCTA } from '@/components/sections';
-import { Check } from 'lucide-react';
+import { Check, FileText, BarChart3, Zap } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export const metadata: Metadata = {
@@ -12,50 +12,72 @@ export const metadata: Metadata = {
     'Genesis pricing plans for marketing teams of all sizes. Start with Core, scale to Enterprise.',
 };
 
+// Value propositions shown before pricing tiers
+const valueProps = [
+  {
+    icon: FileText,
+    title: 'Full reasoning traces',
+    description: 'Every verdict includes the complete reasoning chain—see exactly why content succeeded or failed.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Benchmark context',
+    description: 'Compare your alignment scores against historical performance and industry benchmarks.',
+  },
+  {
+    icon: Zap,
+    title: 'Decision-ready outputs',
+    description: 'Clear recommendations formatted for board presentations, team alignment, or client reports.',
+  },
+];
+
 const tiers = [
   {
     name: 'Core',
-    description: 'The foundation for understanding your LinkedIn strategy',
-    price: 'Coming soon',
+    description: 'Essential analysis for growing teams',
+    price: 'From £500/mo',
+    priceNote: 'Billed monthly',
     features: [
       'Monthly Genesis Profile',
-      'Verdict system (Pass, Fail, Coincidence, Uncertain)',
+      'Four-verdict classification system',
       'Intent declaration workshop',
       'Basic pattern recognition',
       'Email delivery',
       'Up to 50 posts per month',
     ],
     cta: {
-      text: 'Get started',
-      href: '/contact',
+      text: 'Contact sales',
+      href: '/contact?reason=pricing-core',
     },
     highlighted: false,
   },
   {
     name: 'Advanced',
-    description: 'Everything in Core, plus deeper insights',
-    price: 'Coming soon',
+    description: 'Deeper insights for established teams',
+    price: 'From £900/mo',
+    priceNote: 'Billed monthly',
     features: [
       'Bi-weekly profiles',
       'Deep pattern analysis',
       'Alignment score tracking',
-      'Reasoning traces for every verdict',
+      'Full reasoning traces',
       'On-demand queries',
       'Slack integration',
       'Up to 150 posts per month',
       'Priority support',
     ],
     cta: {
-      text: 'Get started',
-      href: '/contact',
+      text: 'Contact sales',
+      href: '/contact?reason=pricing-advanced',
     },
     highlighted: true,
     badge: 'Most Popular',
   },
   {
     name: 'Enterprise',
-    description: 'Everything in Advanced, plus custom capabilities',
+    description: 'Custom solutions for complex needs',
     price: 'Custom',
+    priceNote: 'Contact for pricing',
     features: [
       'Weekly profiles',
       'Custom intent frameworks',
@@ -68,7 +90,7 @@ const tiers = [
     ],
     cta: {
       text: 'Contact sales',
-      href: '/contact',
+      href: '/contact?source=pricing-enterprise&interest=enterprise',
     },
     highlighted: false,
   },
@@ -90,7 +112,7 @@ const pricingFAQ = {
     {
       question: 'What counts as a "post"?',
       answer:
-        'Each piece of content you publish on LinkedIn counts as one post, including text posts, articles, documents, and videos.',
+        'Each piece of content you publish counts as one post, including text posts, articles, documents, and videos.',
     },
     {
       question: 'Do you offer discounts for annual billing?',
@@ -98,9 +120,9 @@ const pricingFAQ = {
         'Yes. Annual plans include a 20% discount compared to monthly billing. Contact us for details.',
     },
     {
-      question: 'What\'s included in the intent declaration workshop?',
+      question: 'What is included in the intent declaration workshop?',
       answer:
-        'A guided session with our team to help you articulate your LinkedIn goals, target audience, and success metrics. This ensures Genesis analyses your content against meaningful criteria.',
+        'A guided session with our team to help you articulate your goals, target audience, and success metrics. This ensures Genesis analyses your content against meaningful criteria.',
     },
     {
       question: 'Can I cancel anytime?',
@@ -113,20 +135,38 @@ const pricingFAQ = {
 export default function PricingPage() {
   return (
     <>
-      <section className="pt-32 pb-16 bg-neutral-50">
+      {/* Hero with value propositions */}
+      <section className="pt-32 pb-12 bg-neutral-900">
         <Container size="xl">
-          <div className="text-center max-w-3xl mx-auto">
-            <SectionLabel>Pricing</SectionLabel>
-            <h1 className="font-display text-display-lg text-neutral-900 mb-6">
-              Simple pricing, powerful insights
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <SectionLabel variant="light">Pricing</SectionLabel>
+            <h1 className="font-display text-display-lg text-neutral-50 mb-6">
+              Clarity at every scale
             </h1>
-            <p className="text-body-lg text-neutral-600">
-              Choose the plan that fits your needs. All plans include our core verdict system and pattern analysis.
+            <p className="text-body-lg text-neutral-300">
+              Every plan includes the Genesis verdict system, pattern analysis, and full reasoning traces. Choose the frequency and depth that fits your team.
             </p>
+          </div>
+
+          {/* Value props */}
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {valueProps.map((prop) => {
+              const Icon = prop.icon;
+              return (
+                <div key={prop.title} className="text-center">
+                  <div className="w-12 h-12 bg-brand-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-6 w-6 text-brand-400" />
+                  </div>
+                  <h3 className="font-semibold text-neutral-50 mb-2">{prop.title}</h3>
+                  <p className="text-body-sm text-neutral-400">{prop.description}</p>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
 
+      {/* Pricing Tiers */}
       <section className="section bg-white">
         <Container size="xl">
           <div className="grid md:grid-cols-3 gap-8">
@@ -134,10 +174,10 @@ export default function PricingPage() {
               <div
                 key={tier.name}
                 className={clsx(
-                  'rounded-2xl p-8 relative flex flex-col',
+                  'group rounded-2xl p-8 relative flex flex-col transition-all duration-normal',
                   tier.highlighted
-                    ? 'bg-neutral-900 text-neutral-50 ring-4 ring-brand-500'
-                    : 'bg-neutral-50'
+                    ? 'bg-neutral-900 text-neutral-50 ring-2 ring-brand-500'
+                    : 'bg-neutral-50 hover:ring-2 hover:ring-neutral-300 hover:-translate-y-1 hover:shadow-lg'
                 )}
               >
                 {tier.badge && (
@@ -174,6 +214,14 @@ export default function PricingPage() {
                   >
                     {tier.price}
                   </div>
+                  <p
+                    className={clsx(
+                      'text-body-sm mt-1',
+                      tier.highlighted ? 'text-neutral-400' : 'text-neutral-500'
+                    )}
+                  >
+                    {tier.priceNote}
+                  </p>
                 </div>
 
                 {/* Features */}
@@ -189,7 +237,8 @@ export default function PricingPage() {
                       <span
                         className={clsx(
                           'text-body-md',
-                          tier.highlighted ? 'text-neutral-200' : 'text-neutral-600'
+                          tier.highlighted ? 'text-neutral-200' : 'text-neutral-600',
+                          !tier.highlighted && 'group-hover:text-neutral-800'
                         )}
                       >
                         {feature}
@@ -203,7 +252,10 @@ export default function PricingPage() {
                   href={tier.cta.href}
                   variant={tier.highlighted ? 'brand' : 'secondary'}
                   size="lg"
-                  className="w-full justify-center"
+                  className={clsx(
+                    'w-full justify-center',
+                    !tier.highlighted && 'group-hover:border-neutral-900 group-hover:bg-neutral-900 group-hover:text-white'
+                  )}
                 >
                   {tier.cta.text}
                 </Button>
@@ -211,15 +263,6 @@ export default function PricingPage() {
             ))}
           </div>
 
-          {/* Enterprise note */}
-          <div className="mt-16 text-center">
-            <p className="text-body-lg text-neutral-600 mb-4">
-              Need a custom solution for your organization?
-            </p>
-            <Button href="/contact" variant="ghost" withArrow>
-              Talk to our enterprise team
-            </Button>
-          </div>
         </Container>
       </section>
 
@@ -229,10 +272,10 @@ export default function PricingPage() {
 
       <FinalCTA
         headline="Ready to understand what's working?"
-        subheadline="Start your 14-day evaluation. No credit card required."
+        subheadline="Contact us to discuss how decision intelligence can inform your content strategy. Only verified learnings reinforce your approach."
         showForm={false}
-        buttonText="Get started"
-        buttonHref="/contact"
+        buttonText="Contact us"
+        buttonHref="/contact?reason=pricing"
         variant="dark"
       />
     </>

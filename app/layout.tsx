@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
+import { AnimationProvider } from '@/contexts/AnimationContext';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -78,19 +79,21 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body bg-neutral-50 text-neutral-900 antialiased">
-        {/* Skip link for keyboard navigation */}
-        <a
-          href="#main-content"
-          className="skip-link"
-        >
-          Skip to main content
-        </a>
+        <AnimationProvider>
+          {/* Skip link for keyboard navigation */}
+          <a
+            href="#main-content"
+            className="skip-link"
+          >
+            Skip to main content
+          </a>
 
-        <Navigation />
+          <Navigation />
 
-        <main id="main-content">{children}</main>
+          <main id="main-content">{children}</main>
 
-        <Footer />
+          <Footer />
+        </AnimationProvider>
       </body>
     </html>
   );

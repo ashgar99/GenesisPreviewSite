@@ -15,3 +15,5 @@ export { ComparisonTable } from './ComparisonTable';
 export { ResourcesTeaser } from './ResourcesTeaser';
 export { FAQ } from './FAQ';
 export { FinalCTA } from './FinalCTA';
+export { WhoItsFor } from './WhoItsFor';
+export { TechnicalDetails } from './TechnicalDetails';

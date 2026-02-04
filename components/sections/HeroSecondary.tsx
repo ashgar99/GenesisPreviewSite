@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Container } from '@/components/layout/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { Button } from '@/components/ui/Button';
@@ -13,6 +16,7 @@ interface HeroSecondaryProps {
   };
   variant?: 'light' | 'dark';
   align?: 'left' | 'center';
+  videoSrc?: string;
 }
 
 export function HeroSecondary({
@@ -22,17 +26,53 @@ export function HeroSecondary({
   cta,
   variant = 'light',
   align = 'center',
+  videoSrc,
 }: HeroSecondaryProps) {
-  const isDark = variant === 'dark';
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // If video is provided, always render dark variant
+  const isDark = videoSrc ? true : variant === 'dark';
 
   return (
     <section
       className={clsx(
-        'pt-32 pb-16 sm:pt-40 sm:pb-20',
-        isDark ? 'bg-neutral-900' : 'bg-neutral-50'
+        'relative pt-32 pb-16 sm:pt-40 sm:pb-20 overflow-hidden',
+        !videoSrc && (isDark ? 'bg-neutral-900' : 'bg-neutral-50')
       )}
     >
-      <Container size="xl">
+      {/* Video Background */}
+      {videoSrc && !prefersReducedMotion && (
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            aria-hidden="true"
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+          {/* Dark overlay for text contrast */}
+          <div className="absolute inset-0 bg-neutral-950/70" />
+        </div>
+      )}
+
+      {/* Static fallback for reduced motion or video pages */}
+      {videoSrc && prefersReducedMotion && (
+        <div className="absolute inset-0 z-0 bg-neutral-900" />
+      )}
+
+      <Container size="xl" className="relative z-10">
         <div
           className={clsx(
             'max-w-3xl',

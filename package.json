@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preview": "next build && next start",
+    "preview": "next build && npx serve@latest out",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

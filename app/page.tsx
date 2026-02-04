@@ -6,7 +6,7 @@ import {
   HowItWorks,
   FeatureGrid,
   OutcomesMetrics,
-  PersonaCards,
+  WhoItsFor,
   MethodologySection,
   CaseStudyTeaser,
   SecurityTrust,
@@ -17,35 +17,29 @@ import {
 
 // Content data for the home page
 const heroContent = {
-  badge: 'Marketing Intelligence',
-  headline: 'Know which posts worked—and why',
+  badge: 'Decision Intelligence',
+  headline: 'Decision intelligence for marketing',
   subheadline:
-    'Genesis analyses your LinkedIn content against your goals and shows you whether results came from your strategy—or from something else.',
-  primaryCta: {
-    text: 'Get your first profile',
-    href: '/contact',
-  },
-  secondaryCta: {
-    text: 'See how it works',
-    href: '#how-it-works',
-  },
+    'Genesis analyses your content against declared goals and blocks coincidental wins from reinforcing strategy. Only verified learnings compound.',
+  trustSignal: 'For marketing teams who need to prove strategy, not just activity.',
+  videoSrc: '/videos/landing-hero-bg.mp4',
 };
 
 const problemContent = {
-  headline: 'LinkedIn analytics tell you what happened. They don\'t tell you why.',
+  headline: 'Analytics tell you what happened. They do not tell you why.',
   paragraphs: [
-    'You\'ve seen a post perform well. The likes are there. The comments look good. But was it the hook that worked? The timing? The topic? Or was it something else entirely—something you couldn\'t repeat if you tried?',
-    'Most analytics show you numbers without context. They tell you a post got 50,000 impressions but not whether those impressions came from the strategy you intended or from an algorithm quirk you\'ll never understand.',
-    'Teams end up doubling down on tactics that worked once by accident, while ignoring approaches that failed for fixable reasons. Without knowing why something worked, you can\'t reliably do it again.',
+    'You have seen a post perform well. The engagement is there. The comments look good. But was it the hook that worked? The timing? The topic? Or was it something else entirely—something you could not repeat if you tried?',
+    'Most analytics show you numbers without context. They tell you a post got 50,000 impressions but not whether those impressions came from the strategy you intended or from an algorithm quirk you will never understand.',
+    'Teams end up doubling down on tactics that worked once by accident, while ignoring approaches that failed for fixable reasons. Lucky wins corrupt strategy. Without knowing why something worked, you cannot reliably do it again.',
   ],
 };
 
 const solutionContent = {
-  headline: 'Genesis tells you if results happened for the right reasons',
+  headline: 'Genesis blocks luck from reinforcing your strategy',
   paragraphs: [
-    'Genesis is a decision intelligence product for LinkedIn marketing. It analyses your content performance against your declared goals and tells you whether your results align with your intent.',
-    'When a post performs well, Genesis shows you whether it performed because of your strategy—or despite it. When a post underperforms, Genesis shows you whether the approach was flawed or just unlucky.',
-    'This means you can build on what actually works, not what happened to work once. Your strategy improves based on evidence, not guesswork.',
+    'Genesis is a decision intelligence product for content marketing. It analyses your content performance against your declared goals and tells you whether your results align with your intent.',
+    'When content performs well, Genesis shows you whether it performed because of your strategy—or despite it. Coincidental wins are blocked from influencing future decisions until you recalibrate.',
+    'Only verified successes and clean failures reinforce your strategy. This means you build on what actually works, not what happened to work once.',
   ],
   cta: {
     text: 'Learn more about the platform',
@@ -54,148 +48,123 @@ const solutionContent = {
 };
 
 const howItWorksContent = {
-  headline: 'Three steps to understanding what\'s working',
+  headline: 'Three steps to clarity',
   steps: [
     {
       number: 1,
       title: 'Declare your intent',
       description:
-        'Before any analysis happens, you tell Genesis what you\'re trying to achieve. What\'s the goal of your LinkedIn presence? Who are you trying to reach? This isn\'t optional—it\'s foundational.',
+        'Start by telling Genesis what you\'re trying to achieve—your strategic goals, target audience, and success criteria. This becomes the benchmark against which all results are measured.',
     },
     {
       number: 2,
-      title: 'Upload your data',
+      title: 'Connect your data',
       description:
-        'Export your LinkedIn data (CSV or XLSX) and upload it to Genesis. No complex integrations. No API connections to manage. Just your data, which takes about two minutes to prepare.',
+        'Upload your content performance data via CSV or XLSX export. Additional data sources coming soon. No complex integrations required—setup takes minutes, not days.',
     },
     {
       number: 3,
-      title: 'Receive your profile',
+      title: 'Receive your verdict',
       description:
-        'Genesis analyses your content against your declared intent and delivers a Genesis Profile—a clear breakdown of which posts succeeded for the right reasons.',
+        'Genesis analyses each piece of content against your declared intent and delivers a clear verdict: did it succeed because of your strategy, despite it, or by coincidence?',
     },
   ],
 };
 
 const featureGridContent = {
   label: 'The Genesis Profile',
-  headline: 'A monthly verdict on your LinkedIn strategy',
+  headline: 'A periodic verdict on your content strategy',
   subheadline:
-    'The Genesis Profile is a comprehensive analysis delivered every month. It includes:',
+    'The Genesis Profile is a comprehensive analysis of your content performance. It includes:',
   features: [
     {
       icon: 'check' as const,
       title: 'Verdict breakdown',
       description:
-        'Every post receives one of four verdicts: Pass (success by design), Fail (clean miss), Coincidence (success by accident), or Uncertain (insufficient data).',
+        'Every piece of content receives one of four verdicts: Pass (success by design), Fail (clear miss), Coincidence (likely circumstantial), or Uncertain (insufficient data).',
     },
     {
       icon: 'layers' as const,
       title: 'Pattern analysis',
       description:
-        'Genesis identifies repeatable patterns in your content—approaches that consistently produce results for the right reasons.',
+        'Genesis identifies repeatable patterns in your content—approaches that consistently produce results aligned with your intent.',
     },
     {
       icon: 'chart' as const,
       title: 'Alignment score',
       description:
-        'A single metric that shows how well your results align with your stated intent. Track this over time to see if your strategy is improving.',
+        'A single metric tracking how well your results align with your stated goals. Monitor trends to measure strategy improvement.',
     },
     {
       icon: 'file' as const,
       title: 'Reasoning traces',
       description:
-        'For each verdict, Genesis provides its reasoning. You\'ll see exactly why a post received its classification.',
+        'For each verdict, Genesis provides full reasoning. You\'ll see exactly why content received its classification.',
     },
   ],
 };
 
 const outcomesContent = {
-  headline: 'Results that matter',
+  headline: 'Operational clarity, not vanity metrics',
   metrics: [
     {
-      value: '67%',
-      label: 'Average pattern confidence',
-      context: 'After 3 months of analysis',
-      isPlaceholder: true,
+      value: '4',
+      label: 'Verdict categories',
+      context: 'Pass, Fail, Coincidence, Uncertain',
+      isPlaceholder: false,
     },
     {
-      value: '3×',
-      label: 'ROI improvement',
-      context: 'For teams using Genesis insights',
-      isPlaceholder: true,
+      value: '100%',
+      label: 'Decision traced',
+      context: 'Every verdict includes reasoning',
+      isPlaceholder: false,
     },
     {
-      value: '<5min',
-      label: 'Setup time',
-      context: 'From signup to first upload',
+      value: '1',
+      label: 'Alignment score',
+      context: 'Track strategy fit over time',
       isPlaceholder: false,
     },
   ],
-};
-
-const personasContent = {
-  headline: 'Built for people who need to justify their approach',
-  personas: [
-    {
-      icon: 'user' as const,
-      title: 'Heads of marketing at growing companies',
-      description:
-        'You\'re accountable for results, but you\'re tired of presenting metrics without knowing if they mean anything. Genesis gives you evidence to back up your strategy.',
-      href: '/solutions/marketing-leaders',
-    },
-    {
-      icon: 'briefcase' as const,
-      title: 'Founders doing their own content',
-      description:
-        'You don\'t have time to guess what works. You need to know which of your approaches is worth continuing and which is wasting your limited time.',
-      href: '/solutions/founders',
-    },
-    {
-      icon: 'users' as const,
-      title: 'Agency owners managing multiple clients',
-      description:
-        'You need to show clients that your work is producing results for the right reasons—not just producing numbers.',
-      href: '/solutions/agencies',
-    },
-  ],
+  sourceNote: 'Profile delivery typically within 5 business days. Timeline depends on data completeness and analysis requirements.',
 };
 
 const methodologyContent = {
-  headline: 'Two models. One verdict.',
+  headline: 'Two lenses. One verdict.',
   description: [
-    'Genesis uses a dual-model approach to analyse your content. The Result Intelligence Model (RIM) examines what happened—engagement patterns, audience response, performance metrics.',
-    'The Intent Execution Model (IEM) examines what you intended—your declared goals, target audience, and strategic priorities.',
-    'Where these two models intersect, Genesis generates a verdict: did this content succeed because of your strategy, despite it, or by coincidence? This is the insight that other analytics tools simply cannot provide.',
+    'Genesis analyses your content through a dual-framework approach. One lens examines what actually happened: engagement patterns, audience response, and performance metrics across your content.',
+    'The other lens examines what you intended: your declared goals, target audience, and strategic priorities as defined in your intent declaration.',
+    'Where these two perspectives intersect, Genesis generates a verdict. This intersection reveals whether success came from strategy or circumstance, the critical insight that transforms how marketing teams make decisions.',
   ],
 };
 
 const caseStudiesContent = {
-  headline: 'See how teams use Genesis',
+  headline: 'See how Genesis analysis works',
   caseStudies: [
     {
-      company: 'Acme Marketing Co.',
-      industry: 'Marketing Agency',
-      challenge: 'Struggled to prove ROI to clients beyond vanity metrics',
-      outcome: '67% increase in client retention through evidence-based reporting',
-      href: '/case-studies/acme-marketing',
-      isPlaceholder: true,
+      company: 'B2B SaaS Analysis',
+      industry: 'Pilot Study',
+      challenge: 'High engagement but unclear connection to pipeline',
+      outcome: 'Identified that 43% of "successful" posts succeeded by coincidence',
+      href: '/case-studies',
+      image: '/images/case-studies/b2b-saas.jpg',
+      isPlaceholder: false,
     },
     {
-      company: 'TechStart Inc.',
-      industry: 'B2B SaaS',
-      challenge: 'Founder posting without clear strategy measurement',
-      outcome: '3× improvement in content-attributed leads',
-      href: '/case-studies/techstart',
-      isPlaceholder: true,
+      company: 'Agency Reporting',
+      industry: 'Pilot Study',
+      challenge: 'Monthly reports lacked strategic insight',
+      outcome: 'Verdict-based reporting that clients could act on',
+      href: '/case-studies',
+      isPlaceholder: false,
     },
     {
-      company: 'Growth Partners',
-      industry: 'Consultancy',
-      challenge: 'Needed to justify marketing spend to board',
-      outcome: 'Clear evidence of strategy alignment for board reporting',
-      href: '/case-studies/growth-partners',
-      isPlaceholder: true,
+      company: 'Founder Content',
+      industry: 'Pilot Study',
+      challenge: 'Limited time, no clear measurement framework',
+      outcome: 'Clear verdicts on what to continue vs stop',
+      href: '/case-studies',
+      isPlaceholder: false,
     },
   ],
 };
@@ -203,7 +172,7 @@ const caseStudiesContent = {
 const securityContent = {
   headline: 'Your data stays secure',
   description:
-    'Genesis is built with enterprise security in mind. Your LinkedIn data is encrypted, stored in UK/EU data centres, and never shared or sold.',
+    'Genesis is built with enterprise security in mind. Your content data is encrypted, stored in UK/EU data centres, and never shared or sold.',
   badges: [
     { icon: 'shield' as const, label: 'GDPR Compliant' },
     { icon: 'server' as const, label: 'UK/EU Data Centres' },
@@ -216,20 +185,20 @@ const resourcesContent = {
   headline: 'Latest insights',
   resources: [
     {
-      title: 'Why LinkedIn Analytics Aren\'t Enough',
+      title: 'Why Platform Analytics Are Not Enough',
       excerpt:
         'Understanding the gap between what happened and why it happened in your content strategy.',
       category: 'Insights',
       date: 'January 2026',
-      href: '/resources/blog/linkedin-analytics-gap',
+      href: '/resources',
     },
     {
-      title: 'The Intent-First Approach to Content',
+      title: 'The Blocking Mechanism Explained',
       excerpt:
-        'How declaring your goals before analysis transforms the way you measure success.',
+        'How Genesis prevents lucky wins from corrupting your strategy—and why this matters.',
       category: 'Methodology',
       date: 'January 2026',
-      href: '/resources/blog/intent-first-approach',
+      href: '/resources',
     },
     {
       title: 'Understanding the Four Verdicts',
@@ -237,7 +206,7 @@ const resourcesContent = {
         'A deep dive into Pass, Fail, Coincidence, and Uncertain—and what each means for your strategy.',
       category: 'Product',
       date: 'December 2025',
-      href: '/resources/blog/four-verdicts',
+      href: '/resources',
     },
   ],
 };
@@ -246,29 +215,29 @@ const faqContent = {
   headline: 'Common questions, direct answers',
   items: [
     {
-      question: 'How is this different from LinkedIn Analytics?',
+      question: 'How is this different from platform analytics?',
       answer:
-        'LinkedIn Analytics tells you what happened—impressions, clicks, engagement rate. Genesis tells you why it happened and whether the "why" matches what you intended. LinkedIn shows you numbers. Genesis shows you whether those numbers mean what you think they mean.',
+        'Platform analytics tell you what happened—impressions, clicks, engagement rate. Genesis tells you why it happened and whether the "why" matches what you intended. Analytics show you numbers. Genesis shows you whether those numbers mean what you think they mean.',
     },
     {
       question: 'What data do I need to provide?',
       answer:
-        'You\'ll export your LinkedIn data using LinkedIn\'s built-in export feature. This gives you a CSV or XLSX file containing your posts, their content, and their performance metrics. Upload that file to Genesis. No API integration required.',
+        'Export your content performance data as CSV or XLSX. Currently we support LinkedIn exports, with additional data sources coming soon. Upload that file to Genesis. No complex integrations required.',
     },
     {
       question: 'How long until I get my first profile?',
       answer:
-        'After you upload your data and declare your intent, you\'ll receive your first Genesis Profile within 5 business days. Subsequent profiles arrive on your chosen schedule.',
+        'After you upload your data and declare your intent, you will receive your first Genesis Profile within 5 business days. Subsequent profiles arrive on your chosen schedule.',
     },
     {
-      question: 'What if I don\'t have clear goals yet?',
+      question: 'What happens when content succeeds by luck?',
       answer:
-        'Genesis includes an intent-setting workshop as part of onboarding. We\'ll help you articulate what you\'re actually trying to achieve with your LinkedIn presence.',
+        'Genesis marks it as Coincidence and blocks it from reinforcing your strategy. You can recalibrate the intent or exclude it entirely. This prevents lucky outcomes from corrupting your decision-making.',
     },
     {
       question: 'Is my data secure?',
       answer:
-        'Yes. Your LinkedIn data is encrypted at rest and in transit. It\'s stored in UK/EU data centres and is never shared with third parties or sold to anyone.',
+        'Yes. Your content data is encrypted at rest and in transit. It is stored in UK/EU data centres and is never shared with third parties or sold to anyone.',
     },
     {
       question: 'Can I cancel anytime?',
@@ -279,12 +248,13 @@ const faqContent = {
 };
 
 const finalCtaContent = {
-  headline: 'Find out what\'s actually driving your results',
+  headline: 'Ready to separate strategy from luck?',
   subheadline:
-    'Start with your first Genesis Profile. See which of your LinkedIn posts succeeded for the right reasons—and which ones just got numbers.',
-  formPlaceholder: 'Enter your email',
-  buttonText: 'Get your first profile',
-  note: '14-day evaluation period. No credit card required to start.',
+    'Genesis is now accepting pilot customers. Contact us to discuss how decision intelligence can transform your content strategy.',
+  formPlaceholder: 'Enter your work email',
+  buttonText: 'Contact us',
+  buttonHref: '/contact?reason=pilot',
+  note: 'We review every enquiry and respond within 1 business day.',
 };
 
 export default function HomePage() {
@@ -292,9 +262,7 @@ export default function HomePage() {
     <>
       <HeroPrimary {...heroContent} />
 
-      <TrustStrip
-        placeholderText="Built for B2B marketing teams who need to prove results"
-      />
+      <TrustStrip />
 
       <ProblemSection {...problemContent} />
 
@@ -308,7 +276,7 @@ export default function HomePage() {
 
       <OutcomesMetrics {...outcomesContent} />
 
-      <PersonaCards {...personasContent} />
+      <WhoItsFor />
 
       <MethodologySection {...methodologyContent} />
 
