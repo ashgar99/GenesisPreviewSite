@@ -1,285 +1,109 @@
 'use client';
 
-import { useState } from 'react';
-import { Container } from '@/components/layout/Container';
-import { SectionLabel } from '@/components/ui/SectionLabel';
-import { Button } from '@/components/ui/Button';
-import { clsx } from 'clsx';
-import { User, Briefcase, Users, TrendingUp, Settings, Globe, ArrowRight, CheckCircle } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const roles = [
+const mechanicalSpring = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 40,
+  mass: 1,
+};
+
+const personas = [
   {
-    id: 'marketing-leader',
-    icon: User,
-    title: 'Marketing Leader',
-    subtitle: 'Prove strategy, not just activity',
-    concerns: [
-      'Proving ROI to leadership with evidence',
-      'Making confident budget decisions',
-      'Understanding what actually drives pipeline',
-    ],
-    deliverables: [
-      'Board-ready summary reports',
-      'Pattern analysis of what works',
-      'Clear reasoning traces',
-    ],
-    exampleOutput: 'A one-page executive summary showing that 4 of 12 posts achieved their stated goals, 3 failed for identifiable reasons, and 2 succeeded by coincidence.',
-    cta: { text: 'See sample outputs', href: '/contact?source=whoisfor-marketing&interest=sample-outputs' },
+    id:      'marketing',
+    index:   '01',
+    title:   'Heads of marketing',
+    tagline: 'Need evidence to back strategy',
+    desc:    "Stop defending results with anecdote. Genesis gives you a structured verdict system that separates strategy-driven wins from circumstantial ones—so your reporting is defensible.",
+    signals: ['Monthly Genesis Profile', 'Alignment score tracking', 'Reasoning traces'],
   },
   {
-    id: 'growth',
-    icon: TrendingUp,
-    title: 'Growth / Performance',
-    subtitle: 'Optimise what actually works',
-    concerns: [
-      'Attribution clarity for content',
-      'Testing velocity for new approaches',
-      'Optimising spend across content types',
-    ],
-    deliverables: [
-      'Alignment score tracking over time',
-      'Verdict breakdown by content type',
-      'Pattern recognition across posts',
-    ],
-    exampleOutput: 'A quarterly trends report showing thought leadership posts have 73% alignment with intent, while promotional posts have 31%.',
-    cta: { text: 'View the workflow', href: '/contact?source=whoisfor-growth&interest=sample-outputs' },
+    id:      'founders',
+    index:   '02',
+    title:   'Founders',
+    tagline: "Don't have time to guess what works",
+    desc:    "You're posting. Some things perform. Some don't. Genesis tells you which is which—quickly, clearly, without requiring you to become a data analyst.",
+    signals: ['Clear Pass/Fail verdicts', 'Pattern recognition', 'Intent framework'],
   },
   {
-    id: 'revops',
-    icon: Settings,
-    title: 'RevOps / Marketing Ops',
-    subtitle: 'Clean data, clear methodology',
-    concerns: [
-      'Reliable reporting infrastructure',
-      'Integration with existing tools',
-      'Audit trails and transparency',
-    ],
-    deliverables: [
-      'CSV/XLSX data exports',
-      'Full reasoning traces',
-      'Integration documentation',
-    ],
-    exampleOutput: 'A structured data export with verdict classifications, confidence scores, and reasoning traces for your BI dashboard.',
-    cta: { text: 'View integration docs', href: '/platform' },
-  },
-  {
-    id: 'founder',
-    icon: Briefcase,
-    title: 'Founder / GM',
-    subtitle: 'Stop guessing what works',
-    concerns: [
-      'Limited time for content',
-      'No clear measurement framework',
-      'Uncertainty about ROI',
-    ],
-    deliverables: [
-      'Clear "stop/continue" recommendations',
-      'Monthly verdict summary',
-      'Time-to-insight in minutes',
-    ],
-    exampleOutput: 'A simple verdict: "Your technical deep-dives consistently pass; your announcement posts consistently fail. Here\'s why."',
-    cta: { text: 'See how founders use Genesis', href: '/contact?source=whoisfor-founder&interest=sample-outputs' },
-  },
-  {
-    id: 'agency',
-    icon: Users,
-    title: 'Agency Partner',
-    subtitle: 'Prove value, retain clients',
-    concerns: [
-      'Proving value beyond vanity metrics',
-      'Differentiating from competitors',
-      'Managing multiple accounts',
-    ],
-    deliverables: [
-      'Client-ready reports',
-      'Multi-account analysis',
-      'White-label output options',
-    ],
-    exampleOutput: 'A client presentation showing month-over-month alignment improvement with specific examples of content that passed and why.',
-    cta: { text: 'Request partnership info', href: '/contact?source=whoisfor-agency&interest=agency' },
-  },
-  {
-    id: 'regional',
-    icon: Globe,
-    title: 'Regional Marketing',
-    subtitle: 'Understand what works where',
-    concerns: [
-      'What works across different markets',
-      'Adapting global content locally',
-      'Consistent regional reporting',
-    ],
-    deliverables: [
-      'Regional performance comparison',
-      'Market-specific patterns',
-      'Multilingual analysis (EN/JP)',
-    ],
-    exampleOutput: 'A regional comparison showing your APAC content has higher intent alignment than EMEA, with specific patterns explaining why.',
-    cta: { text: 'Learn about regional analysis', href: '/contact?source=regional' },
+    id:      'agencies',
+    index:   '03',
+    title:   'Agencies',
+    tagline: 'Need proof that distinguishes work from commodity content',
+    desc:    "Anyone can produce content. Not everyone can prove it worked for the right reasons. Genesis gives you a forensic layer that elevates your reporting above vanity metrics.",
+    signals: ['Multi-account analysis', 'Client-ready reports', 'Verdict-based delivery'],
   },
 ];
 
 export function WhoItsFor() {
-  const [activeRole, setActiveRole] = useState(roles[0].id);
-  const currentRole = roles.find((r) => r.id === activeRole) || roles[0];
-  const Icon = currentRole.icon;
-
   return (
-    <section className="section bg-white" id="who-its-for">
-      <Container size="xl">
-        <div className="text-center mb-12">
-          <SectionLabel>Who It's For</SectionLabel>
-          <h2 className="font-display text-display-lg text-neutral-900 text-balance mb-4">
-            Built for people who need to justify their approach
-          </h2>
-          <p className="text-body-lg text-neutral-600 max-w-2xl mx-auto">
-            Different roles have different concerns. Genesis delivers specific outputs that answer the questions you actually need answered.
-          </p>
+    <section
+      id="who"
+      className="bg-genesis-cream py-32 px-6 border-b border-genesis-charcoal/10"
+    >
+      <div className="max-w-[90rem] mx-auto">
+
+        {/* Header */}
+        <div className="mb-16">
+          <motion.p
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={mechanicalSpring}
+            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
+          >
+            <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
+            Who it&apos;s for
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ ...mechanicalSpring, delay: 0.1 }}
+            className="font-serif text-genesis-charcoal leading-tight"
+            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          >
+            Built for those who need to know.
+          </motion.h2>
         </div>
 
-        {/* Role Tabs - Desktop */}
-        <div className="hidden lg:flex flex-wrap justify-center gap-2 mb-12">
-          {roles.map((role) => {
-            const RoleIcon = role.icon;
-            return (
-              <button
-                key={role.id}
-                onClick={() => setActiveRole(role.id)}
-                className={clsx(
-                  'flex items-center gap-2 px-4 py-2.5 rounded-full text-body-sm font-medium transition-all',
-                  activeRole === role.id
-                    ? 'bg-brand-500 text-white shadow-md'
-                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
-                )}
-              >
-                <RoleIcon className="h-4 w-4" />
-                {role.title}
-              </button>
-            );
-          })}
-        </div>
+        {/* 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-genesis-charcoal/15">
+          {personas.map((p, index) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ ...mechanicalSpring, delay: index * 0.1 }}
+              className="border-b border-r border-genesis-charcoal/15 p-8 md:p-10 interactive-zone group"
+            >
+              <p className="font-mono text-xs text-genesis-charcoal/25 mb-6">{p.index}</p>
 
-        {/* Role Tabs - Mobile (scrollable) */}
-        <div className="lg:hidden overflow-x-auto -mx-4 px-4 mb-8">
-          <div className="flex gap-2 min-w-max pb-2">
-            {roles.map((role) => {
-              const RoleIcon = role.icon;
-              return (
-                <button
-                  key={role.id}
-                  onClick={() => setActiveRole(role.id)}
-                  className={clsx(
-                    'flex items-center gap-2 px-4 py-2.5 rounded-full text-body-sm font-medium transition-all whitespace-nowrap',
-                    activeRole === role.id
-                      ? 'bg-brand-500 text-white shadow-md'
-                      : 'bg-neutral-100 text-neutral-600'
-                  )}
-                >
-                  <RoleIcon className="h-4 w-4" />
-                  {role.title}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+              <h3 className="font-serif text-2xl text-genesis-charcoal mb-2">{p.title}</h3>
+              <p className="font-mono text-xs tracking-widest uppercase text-genesis-charcoal/40 mb-6">
+                {p.tagline}
+              </p>
 
-        {/* Active Role Content */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Left Column - Role Info */}
-          <div className="bg-neutral-50 rounded-2xl p-6 lg:p-8">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 bg-brand-500 rounded-xl flex items-center justify-center">
-                <Icon className="h-7 w-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-display text-heading-xl text-neutral-900">
-                  {currentRole.title}
-                </h3>
-                <p className="text-body-md text-brand-600 font-medium">
-                  {currentRole.subtitle}
-                </p>
-              </div>
-            </div>
+              <p className="font-sans text-sm text-genesis-charcoal/65 leading-relaxed mb-8">
+                {p.desc}
+              </p>
 
-            {/* What you care about */}
-            <div className="mb-6">
-              <h4 className="text-caption font-semibold uppercase tracking-wider text-neutral-500 mb-3">
-                What you care about
-              </h4>
-              <ul className="space-y-2">
-                {currentRole.concerns.map((concern) => (
-                  <li key={concern} className="flex items-start gap-3 text-body-md text-neutral-600">
-                    <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full mt-2 flex-shrink-0" />
-                    {concern}
+              <ul className="space-y-2 border-t border-genesis-charcoal/10 pt-6">
+                {p.signals.map((s) => (
+                  <li key={s} className="flex items-center gap-3 font-mono text-xs text-genesis-charcoal/50">
+                    <span className="text-genesis-teal" aria-hidden="true">+</span>
+                    {s}
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* What Genesis gives you */}
-            <div>
-              <h4 className="text-caption font-semibold uppercase tracking-wider text-neutral-500 mb-3">
-                What Genesis gives you
-              </h4>
-              <ul className="space-y-2">
-                {currentRole.deliverables.map((deliverable) => (
-                  <li key={deliverable} className="flex items-start gap-3 text-body-md text-neutral-700">
-                    <CheckCircle className="h-5 w-5 text-success-500 mt-0.5 flex-shrink-0" />
-                    {deliverable}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Right Column - Example Output */}
-          <div className="space-y-6">
-            <div className="bg-brand-500/5 border border-brand-500/20 rounded-2xl p-6 lg:p-8">
-              <h4 className="text-caption font-semibold uppercase tracking-wider text-brand-600 mb-4">
-                Example Output
-              </h4>
-              <p className="text-body-lg text-neutral-700 italic leading-relaxed mb-6">
-                "{currentRole.exampleOutput}"
-              </p>
-              <p className="text-body-md text-neutral-600">
-                Want to see more?{' '}
-                <a
-                  href="/contact?reason=example-outputs"
-                  className="text-brand-500 hover:text-brand-600 font-medium underline underline-offset-2"
-                >
-                  Contact us
-                </a>
-              </p>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
-
-        {/* All Roles Grid - Mobile Alternative */}
-        <div className="lg:hidden mt-12 pt-12 border-t border-neutral-200">
-          <h3 className="font-display text-heading-lg text-neutral-900 text-center mb-8">
-            All roles we support
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            {roles.map((role) => {
-              const RoleIcon = role.icon;
-              return (
-                <button
-                  key={role.id}
-                  onClick={() => {
-                    setActiveRole(role.id);
-                    document.getElementById('who-its-for')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="flex flex-col items-center p-4 bg-neutral-50 rounded-xl text-center hover:bg-neutral-100 transition-colors"
-                >
-                  <div className="w-10 h-10 bg-brand-500/10 rounded-lg flex items-center justify-center mb-2">
-                    <RoleIcon className="h-5 w-5 text-brand-600" />
-                  </div>
-                  <span className="text-body-sm font-medium text-neutral-900">{role.title}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }

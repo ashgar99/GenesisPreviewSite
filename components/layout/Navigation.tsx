@@ -3,74 +3,29 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Logo } from '@/components/ui/Logo';
-
-const navigation = {
-  main: [
-    {
-      name: 'Product',
-      href: '/platform',
-      children: [
-        { name: 'Platform Overview', href: '/platform' },
-        { name: 'Example Profile', href: '/outputs' },
-        { name: 'How It Works', href: '/#how-it-works' },
-        { name: 'Pricing', href: '/pricing' },
-      ],
-    },
-    {
-      name: 'Solutions',
-      href: '/solutions',
-      children: [
-        { name: 'For Marketing Leaders', href: '/solutions#marketing-leaders' },
-        { name: 'For Founders', href: '/solutions#founders' },
-        { name: 'For Agencies', href: '/solutions#agencies' },
-      ],
-    },
-    { name: 'Case Studies', href: '/case-studies' },
-    { name: 'Resources', href: '/resources' },
-    { name: 'Company', href: '/company' },
-  ],
-};
+import { Menu, X } from 'lucide-react';
 
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled]           = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on escape key
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-        setOpenDropdown(null);
-      }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
     };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [isMobileMenuOpen]);
 
   return (
@@ -78,207 +33,103 @@ export function Navigation() {
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-normal',
         isScrolled
-          ? 'bg-neutral-900/95 backdrop-blur-sm shadow-lg'
-          : 'bg-neutral-900'
+          ? 'bg-genesis-charcoal/90 backdrop-blur-md border-b border-white/10'
+          : 'bg-genesis-charcoal/60 backdrop-blur-sm'
       )}
     >
       <nav
-        className="container-xl flex items-center justify-between h-[4.5rem]"
+        className="max-w-[90rem] mx-auto px-6 flex items-center justify-between h-[4rem]"
         aria-label="Main navigation"
       >
-        {/* Logo */}
+        {/* Wordmark */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-neutral-50 hover:text-white transition-colors"
+          className="interactive-zone font-mono text-sm tracking-[0.25em] uppercase text-genesis-cream hover:text-genesis-teal transition-colors"
           aria-label="Genesis home"
         >
-          <Logo className="h-8 w-auto" />
+          Genesis.
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-8">
           <ul className="flex items-center gap-6">
-            {navigation.main.map((item) => (
-              <li key={item.name} className="relative">
-                {item.children ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setOpenDropdown(item.name)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
-                    <button
-                      className={clsx(
-                        'flex items-center gap-1 text-body-sm font-medium transition-colors',
-                        'text-neutral-300 hover:text-neutral-50',
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded'
-                      )}
-                      aria-expanded={openDropdown === item.name}
-                      aria-haspopup="true"
-                    >
-                      {item.name}
-                      <ChevronDown
-                        className={clsx(
-                          'h-4 w-4 transition-transform',
-                          openDropdown === item.name && 'rotate-180'
-                        )}
-                      />
-                    </button>
-
-                    {/* Dropdown */}
-                    <div
-                      className={clsx(
-                        'absolute top-full left-0 pt-2 transition-all',
-                        openDropdown === item.name
-                          ? 'opacity-100 visible translate-y-0'
-                          : 'opacity-0 invisible -translate-y-2'
-                      )}
-                    >
-                      <ul className="bg-neutral-800 rounded-lg shadow-xl border border-neutral-700 py-2 min-w-[14rem]">
-                        {item.children.map((child) => (
-                          <li key={child.name}>
-                            <Link
-                              href={child.href}
-                              className={clsx(
-                                'block px-4 py-2.5 text-body-sm text-neutral-300',
-                                'hover:bg-neutral-700 hover:text-neutral-50 transition-colors',
-                                'focus-visible:bg-neutral-700 focus-visible:text-neutral-50 focus-visible:outline-none'
-                              )}
-                            >
-                              {child.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={clsx(
-                      'text-body-sm font-medium transition-colors',
-                      'text-neutral-300 hover:text-neutral-50',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded'
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                )}
+            {[
+              { label: 'How it works', href: '/#mechanism' },
+              { label: 'Features',     href: '/#verdicts'  },
+              { label: 'FAQ',          href: '/#faq'       },
+            ].map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className={clsx(
+                    'interactive-zone font-mono text-xs tracking-widest uppercase',
+                    'text-genesis-cream/60 hover:text-genesis-cream transition-colors'
+                  )}
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
 
-          <Button href="/contact?source=nav-cta" variant="primary" size="sm">
-            Contact Us
-          </Button>
+          <Link
+            href="/contact?source=nav"
+            className={clsx(
+              'interactive-zone font-mono text-xs tracking-widest uppercase',
+              'px-5 py-2.5 border border-genesis-cream text-genesis-cream',
+              'hover:bg-genesis-cream hover:text-genesis-charcoal transition-colors'
+            )}
+          >
+            Get your first profile
+          </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile toggle */}
         <button
-          className={clsx(
-            'lg:hidden p-2 text-neutral-300 hover:text-neutral-50 transition-colors',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded'
-          )}
+          className="interactive-zone lg:hidden p-2 text-genesis-cream/70 hover:text-genesis-cream transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-menu"
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {isMobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <div
-        id="mobile-menu"
         className={clsx(
-          'lg:hidden fixed inset-0 top-[4.5rem] bg-neutral-900 transition-all',
-          isMobileMenuOpen
-            ? 'opacity-100 visible'
-            : 'opacity-0 invisible pointer-events-none'
+          'lg:hidden fixed inset-0 top-[4rem] bg-genesis-charcoal border-t border-white/10 transition-all',
+          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         )}
         aria-hidden={!isMobileMenuOpen}
       >
-        <nav className="container-xl py-6 h-full overflow-y-auto">
-          <ul className="space-y-1">
-            {navigation.main.map((item) => (
-              <li key={item.name}>
-                {item.children ? (
-                  <div>
-                    <button
-                      className={clsx(
-                        'flex items-center justify-between w-full px-4 py-3 text-body-lg font-medium',
-                        'text-neutral-300 hover:text-neutral-50 hover:bg-neutral-800 rounded-lg transition-colors'
-                      )}
-                      onClick={() =>
-                        setOpenDropdown(
-                          openDropdown === item.name ? null : item.name
-                        )
-                      }
-                      aria-expanded={openDropdown === item.name}
-                    >
-                      {item.name}
-                      <ChevronDown
-                        className={clsx(
-                          'h-5 w-5 transition-transform',
-                          openDropdown === item.name && 'rotate-180'
-                        )}
-                      />
-                    </button>
-                    <ul
-                      className={clsx(
-                        'overflow-hidden transition-all',
-                        openDropdown === item.name
-                          ? 'max-h-96 opacity-100'
-                          : 'max-h-0 opacity-0'
-                      )}
-                    >
-                      {item.children.map((child) => (
-                        <li key={child.name}>
-                          <Link
-                            href={child.href}
-                            className={clsx(
-                              'block pl-8 pr-4 py-3 text-body-md text-neutral-400',
-                              'hover:text-neutral-50 hover:bg-neutral-800 rounded-lg transition-colors'
-                            )}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {child.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={clsx(
-                      'block px-4 py-3 text-body-lg font-medium',
-                      'text-neutral-300 hover:text-neutral-50 hover:bg-neutral-800 rounded-lg transition-colors'
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 px-4">
-            <Button
-              href="/contact?source=mobile-nav-cta"
-              variant="primary"
-              size="lg"
-              className="w-full justify-center"
+        <nav className="px-6 py-8 space-y-6">
+          {[
+            { label: 'How it works', href: '/#mechanism' },
+            { label: 'Features',     href: '/#verdicts'  },
+            { label: 'FAQ',          href: '/#faq'       },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="interactive-zone block font-mono text-sm tracking-widest uppercase text-genesis-cream/70 hover:text-genesis-cream transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact Us
-            </Button>
-          </div>
+              {item.label}
+            </Link>
+          ))}
+
+          <Link
+            href="/contact?source=mobile-nav"
+            className={clsx(
+              'interactive-zone block font-mono text-xs tracking-widest uppercase text-center',
+              'px-5 py-4 border border-genesis-cream text-genesis-cream',
+              'hover:bg-genesis-cream hover:text-genesis-charcoal transition-colors'
+            )}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Get your first profile
+          </Link>
         </nav>
       </div>
     </header>
