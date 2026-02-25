@@ -1,283 +1,148 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Container } from '@/components/layout/Container';
-import { clsx } from 'clsx';
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { CalibrationGrid } from '@/components/ui/CalibrationGrid';
 
-interface HeroPrimaryProps {
-  badge?: string;
-  headline: string;
-  subheadline: string;
-  trustSignal?: string;
-  showMockup?: boolean;
-  videoSrc?: string;
-}
+const mechanicalSpring = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 40,
+  mass: 1,
+};
 
-export function HeroPrimary({
-  badge,
-  headline,
-  subheadline,
-  trustSignal = 'For marketing teams who need to prove strategy, not just activity.',
-  showMockup = true,
-  videoSrc,
-}: HeroPrimaryProps) {
-  const [mounted, setMounted] = useState(false);
+const verdictData = [
+  { label: 'Pass',        count: 4, color: 'bg-genesis-pass'        },
+  { label: 'Fail',        count: 3, color: 'bg-genesis-fail'        },
+  { label: 'Coincidence', count: 3, color: 'bg-genesis-coincidence' },
+  { label: 'Uncertain',   count: 2, color: 'bg-neutral-500'         },
+];
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+export function HeroPrimary() {
   return (
-    <section className="relative min-h-[100vh] flex items-center overflow-hidden bg-neutral-50">
-      {/* Video background if provided */}
-      {videoSrc && (
-        <>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+    <section
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-genesis-charcoal"
+      aria-label="Hero"
+    >
+      {/* Calibration grid canvas */}
+      <CalibrationGrid />
+
+      {/* Legibility overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to right, rgba(26,29,33,0.55) 0%, rgba(26,29,33,0.0) 60%, rgba(26,29,33,0.2) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[90rem] mx-auto px-6 w-full pt-32 pb-24">
+        <div className="max-w-3xl">
+
+          {/* Kicker — monospace */}
+          <motion.p
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ ...mechanicalSpring, delay: 0.1 }}
+            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6"
           >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-neutral-950/60" />
-        </>
-      )}
+            Turn marketing into data.
+          </motion.p>
 
-      {/* Subtle gradient background - cream to warm white (only when no video) */}
-      {!videoSrc && <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-white" />}
-
-      {/* Geometric accent - refined dual circles (only when no video) */}
-      {!videoSrc && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          {/* Top right accent */}
-          <svg
-            className="absolute -top-20 -right-20 w-[35rem] h-[35rem] opacity-[0.07]"
-            viewBox="0 0 200 200"
-            fill="none"
+          {/* H1 — serif, massive */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...mechanicalSpring, delay: 0.2 }}
+            className="font-serif text-genesis-cream mb-6 leading-[1.08] tracking-tight"
+            style={{ fontSize: 'clamp(2.8rem, 6vw + 1rem, 5.5rem)' }}
           >
-            <circle cx="85" cy="100" r="70" stroke="currentColor" strokeWidth="0.5" className="text-brand-500" />
-            <circle cx="115" cy="100" r="70" stroke="currentColor" strokeWidth="0.5" className="text-brand-500" />
-          </svg>
+            Know which posts worked—
+            <br className="hidden sm:block" />
+            <span className="italic">and why.</span>
+          </motion.h1>
 
-          {/* Bottom left accent */}
-          <svg
-            className="absolute -bottom-32 -left-20 w-[40rem] h-[40rem] opacity-[0.04]"
-            viewBox="0 0 200 200"
-            fill="none"
+          {/* Subtext — scanner reveal */}
+          <motion.p
+            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
+            transition={{ duration: 0.7, ease: 'circOut', delay: 0.45 }}
+            className="font-sans text-lg text-genesis-cream/70 leading-relaxed max-w-xl mb-10"
           >
-            <circle cx="85" cy="100" r="70" stroke="currentColor" strokeWidth="0.5" className="text-neutral-400" />
-            <circle cx="115" cy="100" r="70" stroke="currentColor" strokeWidth="0.5" className="text-neutral-400" />
-          </svg>
+            Genesis analyses your LinkedIn content against your goals and shows
+            you whether results came from your strategy—or from something else.
+          </motion.p>
 
-          {/* Subtle grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.02]"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, #4a7c7c 1px, transparent 1px),
-                linear-gradient(to bottom, #4a7c7c 1px, transparent 1px)
-              `,
-              backgroundSize: '64px 64px',
-            }}
-          />
-        </div>
-      )}
-
-      <Container size="xl" className="relative z-10 pt-32 pb-20">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left column - Copy */}
-          <div className="lg:col-span-6 xl:col-span-5">
-            {/* Category badge */}
-            {badge && (
-              <div
-                className={clsx(
-                  'inline-flex items-center gap-2 mb-6',
-                  mounted && 'animate-fade-in'
-                )}
-              >
-                <span className={clsx('w-2 h-2 rounded-full', videoSrc ? 'bg-brand-400' : 'bg-brand-500')} />
-                <span className={clsx('text-body-sm font-medium uppercase tracking-wider', videoSrc ? 'text-brand-400' : 'text-brand-600')}>
-                  {badge}
-                </span>
-              </div>
-            )}
-
-            {/* Headline */}
-            <h1
-              className={clsx(
-                'font-display text-display-xl mb-6 text-balance',
-                videoSrc ? 'text-white' : 'text-neutral-900',
-                mounted && 'animate-slide-up'
-              )}
-              style={{ animationDelay: '0.1s' }}
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...mechanicalSpring, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 mb-16"
+          >
+            <Link
+              href="/contact?source=hero-primary"
+              className="interactive-zone inline-flex items-center justify-center px-7 py-4 font-mono text-xs tracking-widest uppercase bg-genesis-cream text-genesis-charcoal hover:bg-white transition-colors"
             >
-              {headline}
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className={clsx(
-                'text-body-lg max-w-lg leading-relaxed',
-                videoSrc ? 'text-neutral-200' : 'text-neutral-600',
-                mounted && 'animate-slide-up'
-              )}
-              style={{ animationDelay: '0.2s' }}
+              Get your first profile
+            </Link>
+            <Link
+              href="/#mechanism"
+              className="interactive-zone inline-flex items-center justify-center px-7 py-4 font-mono text-xs tracking-widest uppercase border border-genesis-cream/40 text-genesis-cream/80 hover:border-genesis-cream hover:text-genesis-cream transition-colors"
             >
-              {subheadline}
-            </p>
+              See how it works
+            </Link>
+          </motion.div>
 
-            {/* Trust signal line */}
-            <div
-              className={clsx(
-                'mt-10 pt-8',
-                videoSrc ? 'border-t border-neutral-700' : 'border-t border-neutral-200',
-                mounted && 'animate-slide-up'
-              )}
-              style={{ animationDelay: '0.3s' }}
-            >
-              <p className={clsx('text-body-sm', videoSrc ? 'text-neutral-400' : 'text-neutral-500')}>
-                {trustSignal}
-              </p>
+          {/* Genesis Profile data block */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...mechanicalSpring, delay: 0.75 }}
+            className="border border-white/10 bg-genesis-charcoal/70 backdrop-blur-sm p-5 inline-block"
+          >
+            <div className="flex items-center justify-between gap-8 mb-4 pb-3 border-b border-white/10">
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-genesis-teal">
+                Genesis Profile — Sample
+              </span>
+              <span className="font-mono text-[10px] text-genesis-cream/40">
+                Q4 2024
+              </span>
             </div>
-          </div>
 
-          {/* Right column - Genesis Profile Mockup */}
-          {showMockup && (
-            <div
-              className={clsx(
-                'lg:col-span-6 xl:col-span-7',
-                mounted && 'animate-slide-up'
-              )}
-              style={{ animationDelay: '0.5s' }}
-            >
-              <div className="relative">
-                {/* Subtle shadow beneath card */}
-                <div className="absolute -inset-4 bg-gradient-to-b from-brand-100/40 to-transparent rounded-3xl blur-2xl" />
-
-                {/* Profile Card - Light variant */}
-                <div className="relative bg-white border border-neutral-200 rounded-2xl p-6 sm:p-8 shadow-lg">
-                  {/* Header */}
-                  <div className="flex justify-between items-start mb-6">
-                    <div>
-                      <span className="text-caption font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
-                        Genesis Profile
-                      </span>
-                      <span className="font-display text-xl text-neutral-900">
-                        Monthly Verdict Summary
-                      </span>
-                    </div>
-                    <span className="text-body-sm text-brand-600 bg-brand-100 px-3 py-1.5 rounded-full font-medium">
-                      February 2026
-                    </span>
-                  </div>
-
-                  {/* Verdict Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                    <VerdictCard verdict="pass" count={5} label="Pass" />
-                    <VerdictCard verdict="fail" count={2} label="Fail" />
-                    <VerdictCard verdict="coincidence" count={4} label="Coincidence" />
-                    <VerdictCard verdict="uncertain" count={1} label="Uncertain" />
-                  </div>
-
-                  {/* Alignment Score */}
-                  <div className="bg-neutral-50 rounded-xl p-4 mb-4">
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-body-sm text-neutral-600 font-medium">Alignment Score</span>
-                      <span className="font-display text-lg text-neutral-900">
-                        58% <span className="text-success-500 text-body-sm font-medium">+12</span>
-                      </span>
-                    </div>
-                    <div className="h-2 bg-neutral-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-brand-500 rounded-full transition-all duration-1000"
-                        style={{ width: mounted ? '58%' : '0%' }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Trust chips */}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-100">
-                    <TrustChip label="Confidence" value="87%" />
-                    <TrustChip label="Data window" value="90 days" />
-                    <TrustChip label="Model" value="v2.4.1" />
-                  </div>
+            <div className="space-y-2 mb-4">
+              {verdictData.map((v) => (
+                <div key={v.label} className="flex items-center gap-3">
+                  <span className={`w-2 h-2 rounded-full flex-shrink-0 ${v.color}`} />
+                  <span className="font-mono text-xs text-genesis-cream/50 w-24">
+                    {v.label}
+                  </span>
+                  <span className="font-mono text-xs text-genesis-cream">
+                    {v.count}
+                  </span>
                 </div>
-              </div>
+              ))}
             </div>
-          )}
-        </div>
-      </Container>
 
-      {/* Scroll indicator - arrow only */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <div className={clsx('flex flex-col items-center', videoSrc ? 'text-neutral-300' : 'text-neutral-400')}>
-          <svg
-            className="w-5 h-5 animate-bounce"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+            <div className="pt-3 border-t border-white/10 flex items-center gap-3">
+              <span className="font-mono text-[10px] tracking-wider uppercase text-genesis-cream/40">
+                Pattern confidence
+              </span>
+              <span className="font-mono text-sm text-genesis-cream font-medium">
+                67%
+              </span>
+              <span className="font-mono text-[10px] text-genesis-pass">
+                +9%
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" aria-hidden="true" />
     </section>
-  );
-}
-
-// Verdict card component - light theme
-function VerdictCard({
-  verdict,
-  count,
-  label,
-}: {
-  verdict: 'pass' | 'fail' | 'coincidence' | 'uncertain';
-  count: number;
-  label: string;
-}) {
-  const styles = {
-    pass: {
-      bg: 'bg-success-500/10',
-      border: 'border-success-500/20',
-      text: 'text-success-600',
-    },
-    fail: {
-      bg: 'bg-error-500/10',
-      border: 'border-error-500/20',
-      text: 'text-error-600',
-    },
-    coincidence: {
-      bg: 'bg-warning-500/10',
-      border: 'border-warning-500/20',
-      text: 'text-warning-600',
-    },
-    uncertain: {
-      bg: 'bg-neutral-200',
-      border: 'border-neutral-300',
-      text: 'text-neutral-500',
-    },
-  };
-
-  const style = styles[verdict];
-
-  return (
-    <div className={clsx('rounded-lg border p-3 text-center', style.bg, style.border)}>
-      <div className={clsx('font-display text-2xl mb-0.5', style.text)}>{count}</div>
-      <div className={clsx('text-caption font-semibold uppercase tracking-wider', style.text)}>
-        {label}
-      </div>
-    </div>
-  );
-}
-
-// Trust chip component
-function TrustChip({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-neutral-100 rounded-full">
-      <span className="text-caption text-neutral-500">{label}:</span>
-      <span className="text-caption font-medium text-neutral-700">{value}</span>
-    </div>
   );
 }

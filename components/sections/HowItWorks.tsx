@@ -1,133 +1,133 @@
-import { Container } from '@/components/layout/Container';
-import { SectionLabel } from '@/components/ui/SectionLabel';
-import { clsx } from 'clsx';
+'use client';
 
-interface Step {
-  number: number;
-  title: string;
-  description: string;
-}
+import React from 'react';
+import { motion } from 'framer-motion';
 
-interface HowItWorksProps {
-  label?: string;
-  headline: string;
-  steps: Step[];
-}
+const mechanicalSpring = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 40,
+  mass: 1,
+};
 
-export function HowItWorks({
-  label = 'How It Works',
-  headline,
-  steps,
-}: HowItWorksProps) {
+const steps = [
+  {
+    id:    '01',
+    title: 'Declare your intent',
+    desc:  "Genesis can't judge success without knowing what success looks like to you.",
+  },
+  {
+    id:    '02',
+    title: 'Upload your data',
+    desc:  'Export your LinkedIn data. No complex integrations. No API connections to manage.',
+  },
+  {
+    id:    '03',
+    title: 'Receive your profile',
+    desc:  'A clear breakdown of which posts succeeded for the right reasons.',
+    highlight: true,
+  },
+];
+
+export function HowItWorks() {
   return (
-    <section className="section bg-white">
-      <Container size="xl">
-        <div className="text-center mb-16">
-          <SectionLabel>{label}</SectionLabel>
-          <h2 className="font-display text-display-lg text-neutral-900 text-balance">
-            {headline}
-          </h2>
+    <section
+      id="mechanism"
+      className="bg-genesis-cream py-32 px-6 border-b border-genesis-charcoal/10 overflow-hidden"
+    >
+      <div className="max-w-[90rem] mx-auto">
+
+        {/* Header */}
+        <div className="mb-20">
+          <motion.p
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={mechanicalSpring}
+            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
+          >
+            <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
+            The mechanism
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ ...mechanicalSpring, delay: 0.1 }}
+            className="font-serif text-genesis-charcoal leading-tight"
+            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          >
+            Force a clean link.
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="font-mono text-xs tracking-widest text-genesis-charcoal/40 uppercase mt-3"
+          >
+            Intent → Evidence → Verdict
+          </motion.p>
         </div>
 
-        {/* Steps with connecting line */}
-        <div className="relative">
-          {/* Horizontal connector line (desktop) */}
+        {/* Diagram container */}
+        <div className="relative border border-genesis-charcoal/15 p-8 md:p-16 bg-white/40">
+
+          {/* Background track line */}
           <div
-            className="hidden lg:block absolute top-12 left-[calc(16.67%+1.5rem)] right-[calc(16.67%+1.5rem)] h-0.5 bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200"
+            className="hidden md:block absolute top-[7.5rem] left-[8%] h-px bg-genesis-charcoal/8"
+            style={{ width: '84%' }}
             aria-hidden="true"
           />
 
-          {/* Vertical connector line (mobile/tablet) */}
-          <div
-            className="lg:hidden absolute top-0 bottom-0 left-6 w-0.5 bg-gradient-to-b from-neutral-200 via-neutral-300 to-neutral-200"
+          {/* Animated active line */}
+          <motion.div
+            className="hidden md:block absolute top-[7.5rem] left-[8%] h-px bg-genesis-charcoal origin-left"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1.4, ease: 'circOut' }}
+            style={{ width: '84%' }}
             aria-hidden="true"
           />
 
-          <div className="grid lg:grid-cols-3 gap-8 lg:gap-6">
+          {/* Steps */}
+          <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-4 relative z-10">
             {steps.map((step, index) => (
-              <div
-                key={step.number}
-                className={clsx(
-                  'relative pl-16 lg:pl-0 animate-on-scroll',
-                  `stagger-${index + 1}`
-                )}
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ ...mechanicalSpring, delay: 0.2 + index * 0.35 }}
+                className="flex-1 flex flex-col items-center text-center group interactive-zone"
               >
-                {/* Step Number Circle */}
-                <div className="absolute left-0 lg:relative lg:left-auto lg:mx-auto w-12 h-12 bg-neutral-900 text-neutral-50 rounded-full flex items-center justify-center font-display text-xl mb-6 z-10 shadow-md">
-                  {step.number}
+                {/* Node */}
+                <div
+                  className={`w-14 h-14 flex items-center justify-center border border-genesis-charcoal mb-8 transition-colors duration-300 ${
+                    step.highlight
+                      ? 'group-hover:bg-genesis-pass group-hover:border-genesis-pass group-hover:text-genesis-cream'
+                      : 'group-hover:bg-genesis-charcoal group-hover:text-genesis-cream'
+                  } bg-genesis-cream`}
+                >
+                  <span className="font-mono text-sm text-genesis-charcoal group-hover:text-inherit transition-colors">
+                    {step.id}
+                  </span>
                 </div>
 
-                {/* Step Content */}
-                <div className="lg:text-center lg:mt-8">
-                  <h3 className="font-display text-heading-lg text-neutral-900 mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-body-md text-neutral-600 leading-relaxed max-w-sm lg:mx-auto">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Arrow indicator between steps (desktop only) */}
-                {index < steps.length - 1 && (
-                  <div
-                    className="hidden lg:flex absolute -right-3 top-12 transform -translate-y-1/2 text-neutral-300"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 6L15 12L9 18"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </div>
+                <h3 className="font-serif text-xl text-genesis-charcoal mb-3">
+                  {step.title}
+                </h3>
+                <p className="font-sans text-sm text-genesis-charcoal/60 leading-relaxed max-w-[220px]">
+                  {step.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>
-
-        {/* Decision Intelligence Loop visualization */}
-        <div className="mt-20 pt-12 border-t border-neutral-100">
-          <p className="text-center text-body-sm text-neutral-500 uppercase tracking-wider mb-8">
-            The Decision Intelligence Loop
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-body-md">
-            <span className="px-4 py-2 bg-neutral-100 rounded-full text-neutral-700 font-medium">
-              Intent
-            </span>
-            <svg className="w-5 h-5 text-neutral-400 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="px-4 py-2 bg-neutral-100 rounded-full text-neutral-700 font-medium">
-              Evidence
-            </span>
-            <svg className="w-5 h-5 text-neutral-400 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="px-4 py-2 bg-neutral-100 rounded-full text-neutral-700 font-medium">
-              Verdict
-            </span>
-            <svg className="w-5 h-5 text-neutral-400 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="px-4 py-2 bg-brand-100 rounded-full text-brand-600 font-medium">
-              Strategy Memory
-            </span>
-          </div>
-          <p className="text-center text-body-sm text-neutral-500 mt-6 max-w-xl mx-auto">
-            Only verified learnings compound. Coincidental wins are blocked until recalibrated.
-          </p>
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }

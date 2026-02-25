@@ -3,6 +3,7 @@ import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { AnimationProvider } from '@/contexts/AnimationContext';
+import { CustomCursor } from '@/components/ui/CustomCursor';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -13,7 +14,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://genesis.preview'),
   title: {
-    default: 'Genesis — Marketing Intelligence for LinkedIn',
+    default: 'Genesis — Decision Intelligence for LinkedIn Marketing',
     template: '%s | Genesis',
   },
   description:
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: 'https://genesis.preview',
     siteName: 'Genesis',
-    title: 'Genesis — Marketing Intelligence for LinkedIn',
+    title: 'Genesis — Decision Intelligence for LinkedIn Marketing',
     description:
       'Know which posts worked—and why. Genesis analyses your LinkedIn content against your goals.',
     images: [
@@ -45,13 +46,13 @@ export const metadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Genesis - Marketing Intelligence',
+        alt: 'Genesis - Decision Intelligence',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Genesis — Marketing Intelligence for LinkedIn',
+    title: 'Genesis — Decision Intelligence for LinkedIn Marketing',
     description:
       'Know which posts worked—and why. Genesis analyses your LinkedIn content against your goals.',
     images: ['/images/twitter-card.png'],
@@ -70,21 +71,21 @@ export default function RootLayout({
   return (
     <html lang="en-GB">
       <head>
-        {/* Google Fonts - loaded via CSS for build compatibility */}
+        {/* Genesis Type System: Newsreader (serif) + Inter (sans) + JetBrains Mono */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-body bg-neutral-50 text-neutral-900 antialiased">
+      <body className="font-sans bg-genesis-cream text-genesis-charcoal antialiased">
         <AnimationProvider>
+          {/* Invertible precision cursor — mix-blend-mode: difference */}
+          <CustomCursor />
+
           {/* Skip link for keyboard navigation */}
-          <a
-            href="#main-content"
-            className="skip-link"
-          >
+          <a href="#main-content" className="skip-link">
             Skip to main content
           </a>
 

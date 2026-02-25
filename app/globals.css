@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 /* ===================================
-   GENESIS DESIGN SYSTEM TOKENS
+   GENESIS DESIGN SYSTEM
+   Editorial Brutalism × Precision Instrument
    =================================== */
 
 :root {
   /* Spacing scale (rem-based, 4px base unit) */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
@@ -22,7 +23,15 @@
   --space-32: 8rem;
   --space-40: 10rem;
 
-  /* Color tokens */
+  /* Genesis color tokens */
+  --genesis-charcoal:     #1a1d21;
+  --genesis-cream:        #f8f7f4;
+  --genesis-teal:         #4a7c7c;
+  --genesis-pass:         #4a7c5c;
+  --genesis-fail:         #8c5a5a;
+  --genesis-coincidence:  #7c6f4a;
+
+  /* Legacy neutrals (for non-redesigned pages) */
   --color-neutral-950: #0d0f11;
   --color-neutral-900: #1a1d21;
   --color-neutral-800: #2a2d31;
@@ -32,26 +41,39 @@
   --color-neutral-300: #c4c0b9;
   --color-neutral-200: #e5e2dc;
   --color-neutral-100: #eeece7;
-  --color-neutral-50: #f8f7f4;
+  --color-neutral-50:  #f8f7f4;
 
-  --color-brand-600: #3a6262;
-  --color-brand-500: #4a7c7c;
-  --color-brand-400: #5d9191;
-  --color-brand-100: #dbeaea;
-
+  --color-brand-500:   #4a7c7c;
   --color-success-500: #4a7c5c;
-  --color-error-500: #8c5a5a;
+  --color-error-500:   #8c5a5a;
   --color-warning-500: #7c6f4a;
 
   /* Typography */
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif:   'Newsreader', Georgia, serif;
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'JetBrains Mono', Menlo, Consolas, monospace;
+  /* Legacy aliases */
+  --font-display: var(--font-serif);
+  --font-body:    var(--font-sans);
 
   /* Motion */
-  --duration-fast: 150ms;
+  --duration-fast:   150ms;
   --duration-normal: 250ms;
-  --duration-slow: 400ms;
-  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-slow:   400ms;
+  --easing-default:  cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   CURSOR — Hide default, enable custom
+   =================================== */
+
+@layer base {
+  body,
+  a,
+  button,
+  .interactive-zone {
+    cursor: none;
+  }
 }
 
 /* ===================================
@@ -63,9 +85,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 
   *,
   *::before,
@@ -77,20 +97,20 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-neutral-50);
-  color: var(--color-neutral-900);
+  font-family: var(--font-sans);
+  background-color: var(--genesis-cream);
+  color: var(--genesis-charcoal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Focus states for accessibility */
 :focus-visible {
-  outline: 2px solid var(--color-brand-500);
+  outline: 2px solid var(--genesis-teal);
   outline-offset: 2px;
 }
 
-/* Skip link for keyboard navigation - visually hidden until focused */
+/* Skip link for keyboard navigation */
 .skip-link {
   position: absolute;
   top: -100%;
@@ -98,11 +118,14 @@ body {
   transform: translateX(-50%);
   z-index: 9999;
   padding: 1rem 2rem;
-  background: var(--color-neutral-900);
-  color: white;
-  border-radius: 0 0 0.5rem 0.5rem;
+  background: var(--genesis-charcoal);
+  color: var(--genesis-cream);
+  border: 1px solid var(--genesis-teal);
   text-decoration: none;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   opacity: 0;
   pointer-events: none;
   transition: top 0.2s ease, opacity 0.2s ease;
@@ -112,8 +135,6 @@ body {
   top: 0;
   opacity: 1;
   pointer-events: auto;
-  outline: 2px solid var(--color-brand-500);
-  outline-offset: 2px;
 }
 
 /* ===================================
@@ -173,16 +194,23 @@ body {
 }
 
 /* ===================================
+   VERDICT SYSTEM
+   =================================== */
+
+.verdict-pass        { color: var(--genesis-pass); }
+.verdict-fail        { color: var(--genesis-fail); }
+.verdict-coincidence { color: var(--genesis-coincidence); }
+.verdict-uncertain   { color: var(--color-neutral-500); }
+
+/* ===================================
    ANIMATION UTILITIES
    =================================== */
 
-/* Scroll animations - elements fade in when they enter viewport */
 .animate-on-scroll {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Only animate if user hasn't disabled motion AND browser supports IntersectionObserver */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .animate-on-scroll {
@@ -194,122 +222,34 @@ body {
 }
 
 @keyframes scrollFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(1.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Slide-in animations for scroll */
-.animate-slide-in-left {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.animate-slide-in-right {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-slide-in-left {
-      animation: slideInLeft 0.6s ease-out both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 40%;
-    }
-
-    .animate-slide-in-right {
-      animation: slideInRight 0.6s ease-out both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 40%;
-    }
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-3rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(3rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Stagger delays for grid items */
+/* Stagger delays */
 .stagger-1 { transition-delay: 0.1s; }
 .stagger-2 { transition-delay: 0.2s; }
 .stagger-3 { transition-delay: 0.3s; }
 .stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
 
 /* ===================================
-   VERDICT SYSTEM COLORS
+   SCROLLBAR (subtle)
    =================================== */
 
-.verdict-pass {
-  color: var(--color-success-500);
-}
-
-.verdict-fail {
-  color: var(--color-error-500);
-}
-
-.verdict-coincidence,
-.verdict-uncertain {
-  color: var(--color-warning-500);
-}
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--genesis-cream); }
+::-webkit-scrollbar-thumb { background: var(--genesis-charcoal); opacity: 0.3; }
+::-webkit-scrollbar-thumb:hover { background: var(--genesis-teal); }
 
 /* ===================================
-   CUSTOM SCROLLBAR (subtle)
+   ANIMATION PAUSE TOGGLE
    =================================== */
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-neutral-100);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-neutral-300);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neutral-400);
-}
-
-/* ===================================
-   CUSTOM SELECT DROPDOWN
-   =================================== */
-
-select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 0.75rem center;
-  background-repeat: no-repeat;
-  background-size: 1.25em 1.25em;
-  padding-right: 2.5rem;
+.animations-paused *,
+.animations-paused *::before,
+.animations-paused *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
 }
 
 /* ===================================
@@ -326,34 +266,9 @@ select {
 }
 
 /* ===================================
-   LINE CLAMP UTILITIES
+   BRUTALIST BORDERS
    =================================== */
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ===================================
-   ANIMATION PAUSE TOGGLE
-   =================================== */
-
-.animations-paused *,
-.animations-paused *::before,
-.animations-paused *::after {
-  animation-play-state: paused !important;
-  transition: none !important;
-}
-
-.animations-paused .animate-bounce,
-.animations-paused .animate-marquee,
-.animations-paused .animate-fade-in,
-.animations-paused .animate-slide-up,
-.animations-paused .animate-slide-in-left,
-.animations-paused .animate-slide-in-right {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
+.border-1 {
+  border-width: 1px;
 }

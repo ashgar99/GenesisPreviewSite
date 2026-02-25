@@ -1,151 +1,124 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
-import { Logo } from '@/components/ui/Logo';
-import { useAnimations } from '@/contexts/AnimationContext';
+import { motion } from 'framer-motion';
 
-const footerLinks = {
-  product: {
-    title: 'Product',
-    links: [
-    
-      { name: 'Platform', href: '/platform' },
-      { name: 'Pricing', href: '/pricing' },
-      { name: 'Case Studies', href: '/case-studies' },
-      { name: 'FAQ', href: '/pricing#faq' },
-    ],
-  },
-  solutions: {
-    title: 'Solutions',
-    links: [
-      { name: 'For Marketing Leaders', href: '/solutions#marketing-leaders' },
-      { name: 'For Founders', href: '/solutions#founders' },
-      { name: 'For Agencies', href: '/solutions#agencies' },
-    ],
-  },
-  company: {
-    title: 'Company',
-    links: [
-      { name: 'About', href: '/company' },
-      { name: 'Blog', href: '/resources' },
-      { name: 'Contact', href: '/contact' },
-    ],
-  },
-  legal: {
-    title: 'Legal',
-    links: [
-      { name: 'Privacy Policy', href: '/legal/privacy' },
-      { name: 'Terms of Service', href: '/legal/terms' },
-      { name: 'Cookie Policy', href: '/legal/cookies' },
-    ],
-  },
+const mechanicalSpring = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 40,
+  mass: 1,
 };
-
-const socialLinks = [
-  {
-    name: 'LinkedIn',
-    href: 'https://linkedin.com/company/genesis',
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'X',
-    href: 'https://x.com/genesis',
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { animationsEnabled, toggleAnimations } = useAnimations();
 
   return (
-    <footer className="bg-neutral-900 text-neutral-50">
-      <div className="container-xl section">
-        {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12 pb-12 border-b border-neutral-800">
-          {/* Brand column */}
-          <div className="col-span-2">
-            <Link href="/" className="inline-block mb-4">
-              <Logo variant="light" className="h-8 w-auto" />
+    <footer className="bg-genesis-charcoal text-genesis-cream relative overflow-hidden border-t border-white/10">
+
+      {/* Massive background wordmark — 10% opacity datum typography */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <span
+          className="font-serif font-bold text-genesis-cream whitespace-nowrap"
+          style={{
+            fontSize: 'clamp(8rem, 20vw, 22rem)',
+            opacity: 0.055,
+            letterSpacing: '-0.03em',
+            userSelect: 'none',
+          }}
+        >
+          GENESIS
+        </span>
+      </div>
+
+      {/* Foreground content */}
+      <div className="relative z-10 max-w-[90rem] mx-auto px-6">
+
+        {/* Main CTA block */}
+        <div className="py-28 md:py-36 border-b border-white/10 text-center md:text-left">
+          <motion.p
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={mechanicalSpring}
+            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6 flex items-center gap-2 justify-center md:justify-start"
+          >
+            <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
+            Decision intelligence
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ ...mechanicalSpring, delay: 0.1 }}
+            className="font-serif text-genesis-cream leading-tight mb-8 max-w-3xl mx-auto md:mx-0"
+            style={{ fontSize: 'clamp(2.2rem, 4vw + 0.5rem, 4rem)' }}
+          >
+            Find out what&apos;s actually driving your results.
+          </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ ...mechanicalSpring, delay: 0.25 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+          >
+            <Link
+              href="/contact?source=footer-cta"
+              className="interactive-zone inline-flex items-center justify-center px-8 py-4 font-mono text-xs tracking-widest uppercase bg-genesis-cream text-genesis-charcoal hover:bg-white transition-colors"
+            >
+              Get your first profile
             </Link>
-            <p className="text-body-sm text-neutral-400 max-w-xs mb-6">
-              Decision intelligence for content marketing. Know what worked—and why.
-            </p>
-
-            {/* Social links */}
-            <div className="flex gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-neutral-800 rounded-lg text-neutral-400 hover:text-neutral-50 hover:bg-neutral-700 transition-colors"
-                  aria-label={link.name}
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([key, section]) => (
-            <div key={key}>
-              <h3 className="text-caption font-bold uppercase tracking-wider text-neutral-500 mb-4">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-body-sm text-neutral-400 hover:text-neutral-50 transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            <Link
+              href="/#mechanism"
+              className="interactive-zone inline-flex items-center justify-center px-8 py-4 font-mono text-xs tracking-widest uppercase border border-genesis-cream/30 text-genesis-cream/70 hover:border-genesis-cream hover:text-genesis-cream transition-colors"
+            >
+              See how it works
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-body-sm text-neutral-500">
-            © {currentYear} Genesis. All rights reserved.
+        {/* Links + meta row */}
+        <div className="py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+
+          {/* Wordmark */}
+          <Link
+            href="/"
+            className="interactive-zone font-mono text-sm tracking-[0.25em] uppercase text-genesis-cream/70 hover:text-genesis-cream transition-colors"
+          >
+            Genesis.
+          </Link>
+
+          {/* Nav links */}
+          <ul className="flex flex-wrap gap-6">
+            {[
+              { label: 'Platform',  href: '/platform'      },
+              { label: 'Pricing',   href: '/pricing'       },
+              { label: 'Privacy',   href: '/legal/privacy' },
+              { label: 'Terms',     href: '/legal/terms'   },
+              { label: 'Contact',   href: '/contact'       },
+            ].map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="interactive-zone font-mono text-xs tracking-widest uppercase text-genesis-cream/40 hover:text-genesis-cream/80 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Copyright */}
+          <p className="font-mono text-xs text-genesis-cream/25">
+            © {currentYear} Genesis
           </p>
-
-          <div className="flex items-center gap-6">
-            {/* Pause animations button */}
-            <button
-              onClick={toggleAnimations}
-              className="text-caption text-neutral-500 hover:text-neutral-400 transition-colors"
-              aria-label={animationsEnabled ? 'Pause animations' : 'Resume animations'}
-            >
-              {animationsEnabled ? 'Pause animations' : 'Resume animations'}
-            </button>
-
-            {/* Trust statement */}
-            <p className="text-caption text-neutral-600">
-              Your data is encrypted and never sold.{' '}
-              <Link
-                href="/legal/privacy"
-                className="text-neutral-500 hover:text-neutral-400 underline underline-offset-2"
-              >
-                Learn more
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </footer>
