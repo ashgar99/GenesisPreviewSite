@@ -1,14 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 const personas = [
   {
@@ -38,48 +31,42 @@ const personas = [
 ];
 
 export function WhoItsFor() {
+  const [ref, visible] = useInView('-100px');
+  const v = visible ? 'is-visible' : '';
+
   return (
     <section
       id="who"
+      ref={ref}
       className="bg-genesis-cream py-32 px-6 border-b border-genesis-charcoal/10"
     >
       <div className="max-w-[90rem] mx-auto">
 
         {/* Header */}
         <div className="mb-16">
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={mechanicalSpring}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
-          >
+          <p className={`reveal-left ${v} font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
             Who it&apos;s for
-          </motion.p>
+          </p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-serif text-genesis-charcoal leading-tight"
-            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          <h2
+            className={`reveal-up ${v} font-serif text-genesis-charcoal leading-tight`}
+            style={{
+              fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)',
+              transitionDelay: '0.1s',
+            }}
           >
             Built for those who need to know.
-          </motion.h2>
+          </h2>
         </div>
 
         {/* 3-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-genesis-charcoal/15">
           {personas.map((p, index) => (
-            <motion.div
+            <div
               key={p.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ ...mechanicalSpring, delay: index * 0.1 }}
-              className="border-b border-r border-genesis-charcoal/15 p-8 md:p-10 interactive-zone group"
+              className={`reveal-up ${v} border-b border-r border-genesis-charcoal/15 p-8 md:p-10 interactive-zone group`}
+              style={{ transitionDelay: `${index * 0.1}s` }}
             >
               <p className="font-mono text-xs text-genesis-charcoal/25 mb-6">{p.index}</p>
 
@@ -100,7 +87,7 @@ export function WhoItsFor() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

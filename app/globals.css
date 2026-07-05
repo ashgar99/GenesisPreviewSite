@@ -233,6 +233,108 @@ body {
 .stagger-4 { transition-delay: 0.4s; }
 
 /* ===================================
+   SCROLL REVEAL SYSTEM
+   (Intersection Observer — replaces framer-motion whileInView)
+   =================================== */
+
+.reveal-left   { opacity: 0; transform: translateX(-1.25rem); }
+.reveal-up     { opacity: 0; transform: translateY(1.5rem); }
+.reveal-up-sm  { opacity: 0; transform: translateY(0.75rem); }
+.reveal-fade   { opacity: 0; }
+.reveal-scan   { opacity: 0; clip-path: inset(0 100% 0 0); }
+.reveal-scale-x {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.reveal-left.is-visible,
+.reveal-up.is-visible,
+.reveal-up-sm.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity  0.45s cubic-bezier(0, 0.55, 0.45, 1),
+    transform 0.45s cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+.reveal-fade.is-visible {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.reveal-scan.is-visible {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition:
+    clip-path 0.65s cubic-bezier(0, 0.55, 0.45, 1),
+    opacity   0.4s  cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+.reveal-scale-x.is-visible {
+  opacity: 1;
+  transform: scaleX(1);
+  transition:
+    transform 1.4s cubic-bezier(0, 0.55, 0.45, 1),
+    opacity   0.3s ease;
+}
+
+/* ===================================
+   PAGE-LOAD ANIMATIONS
+   (HeroPrimary — no JS needed)
+   =================================== */
+
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(-1rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes fadeSlideUpSm {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes heroScanner {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes cursorCrosshair {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.hero-kicker     { animation: fadeSlideLeft  0.45s cubic-bezier(0, 0.55, 0.45, 1) 0.10s both; }
+.hero-h1         { animation: fadeSlideUp    0.45s cubic-bezier(0, 0.55, 0.45, 1) 0.20s both; }
+.hero-subtext    { animation: heroScanner    0.70s cubic-bezier(0, 0.55, 0.45, 1) 0.45s both; }
+.hero-ctas       { animation: fadeSlideUpSm  0.45s cubic-bezier(0, 0.55, 0.45, 1) 0.60s both; }
+.hero-data-block { animation: fadeSlideUp    0.45s cubic-bezier(0, 0.55, 0.45, 1) 0.75s both; }
+
+/* ===================================
+   FAQ ACCORDION
+   (CSS grid trick — replaces AnimatePresence height: auto)
+   =================================== */
+
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+.accordion-body.accordion-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-body > div {
+  overflow: hidden;
+}
+
+/* ===================================
    SCROLLBAR (subtle)
    =================================== */
 

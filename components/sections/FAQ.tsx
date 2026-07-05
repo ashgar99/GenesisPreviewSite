@@ -1,14 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 interface FAQItem {
   question: string;
@@ -53,49 +46,42 @@ const defaultItems: FAQItem[] = [
 
 export function FAQ({ headline = 'Common questions, direct answers', items = defaultItems }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [ref, visible] = useInView('-100px');
+  const v = visible ? 'is-visible' : '';
 
   return (
     <section
       id="faq"
+      ref={ref}
       className="bg-genesis-cream py-32 px-6 border-b border-genesis-charcoal/10"
     >
       <div className="max-w-[90rem] mx-auto">
 
         {/* Header */}
         <div className="mb-16">
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={mechanicalSpring}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
-          >
+          <p className={`reveal-left ${v} font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
             FAQ
-          </motion.p>
+          </p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-serif text-genesis-charcoal leading-tight"
-            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          <h2
+            className={`reveal-up ${v} font-serif text-genesis-charcoal leading-tight`}
+            style={{
+              fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)',
+              transitionDelay: '0.1s',
+            }}
           >
             {headline}
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Clean accordion — no chrome, no rounded corners */}
         <div className="border-t border-genesis-charcoal/15 max-w-3xl">
           {items.map((item, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.3, delay: index * 0.06 }}
-              className="border-b border-genesis-charcoal/15"
+              className={`reveal-fade ${v} border-b border-genesis-charcoal/15`}
+              style={{ transitionDelay: `${index * 0.06}s` }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -115,23 +101,15 @@ export function FAQ({ headline = 'Common questions, direct answers', items = def
                 </span>
               </button>
 
-              <AnimatePresence initial={false}>
-                {openIndex === index && (
-                  <motion.div
-                    key="answer"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: 'circOut' }}
-                    className="overflow-hidden"
-                  >
-                    <p className="font-sans text-sm text-genesis-charcoal/60 leading-relaxed pb-6 max-w-2xl">
-                      {item.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {/* CSS grid accordion — replaces AnimatePresence height:auto */}
+              <div className={`accordion-body${openIndex === index ? ' accordion-open' : ''}`}>
+                <div>
+                  <p className="font-sans text-sm text-genesis-charcoal/60 leading-relaxed pb-6 max-w-2xl">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

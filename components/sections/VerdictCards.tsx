@@ -1,14 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 // Static colour values — avoid dynamic Tailwind class generation
 const verdicts = [
@@ -55,82 +48,76 @@ const verdicts = [
 ];
 
 export function VerdictCards() {
+  const [ref, visible] = useInView('-100px');
+  const v = visible ? 'is-visible' : '';
+
   return (
     <section
       id="verdicts"
+      ref={ref}
       className="bg-genesis-charcoal py-32 px-6 border-b border-white/10"
     >
       <div className="max-w-[90rem] mx-auto">
 
         {/* Header */}
         <div className="mb-16">
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={mechanicalSpring}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
-          >
+          <p className={`reveal-left ${v} font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
             The verdict system
-          </motion.p>
+          </p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-serif text-genesis-cream leading-tight max-w-xl"
-            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          <h2
+            className={`reveal-up ${v} font-serif text-genesis-cream leading-tight max-w-xl`}
+            style={{
+              fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)',
+              transitionDelay: '0.1s',
+            }}
           >
             Four outcomes. No ambiguity.
-          </motion.h2>
+          </h2>
         </div>
 
         {/* 4-card grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-white/10">
-          {verdicts.map((v, index) => (
-            <motion.div
-              key={v.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ ...mechanicalSpring, delay: index * 0.08 }}
-              className="border-b border-r border-white/10 p-8 group interactive-zone flex flex-col gap-6"
+          {verdicts.map((v2, index) => (
+            <div
+              key={v2.id}
+              className={`reveal-up ${v} border-b border-r border-white/10 p-8 group interactive-zone flex flex-col gap-6`}
+              style={{ transitionDelay: `${index * 0.08}s` }}
             >
               {/* Symbol + colour dot */}
               <div className="flex items-start justify-between">
                 <span
                   className="font-mono text-3xl select-none"
-                  style={{ color: v.textColor }}
+                  style={{ color: v2.textColor }}
                 >
-                  {v.symbol}
+                  {v2.symbol}
                 </span>
                 <span
                   className="w-2 h-2 rounded-full flex-shrink-0 mt-2"
-                  style={{ backgroundColor: v.dotColor }}
+                  style={{ backgroundColor: v2.dotColor }}
                 />
               </div>
 
               {/* Labels */}
               <div>
-                <p className="font-serif text-xl text-genesis-cream mb-1">{v.label}</p>
+                <p className="font-serif text-xl text-genesis-cream mb-1">{v2.label}</p>
                 <p className="font-mono text-xs tracking-widest uppercase text-genesis-cream/40">
-                  {v.sub}
+                  {v2.sub}
                 </p>
               </div>
 
               {/* Description */}
               <p className="font-sans text-sm text-genesis-cream/60 leading-relaxed flex-grow">
-                {v.desc}
+                {v2.desc}
               </p>
 
               {/* Animated bottom-border on hover */}
               <div
                 className="h-px w-0 group-hover:w-full transition-all duration-500"
-                style={{ backgroundColor: v.lineColor }}
+                style={{ backgroundColor: v2.lineColor }}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

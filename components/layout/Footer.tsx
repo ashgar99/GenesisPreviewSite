@@ -2,20 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [ref, visible] = useInView('-80px');
+  const v = visible ? 'is-visible' : '';
 
   return (
-    <footer className="bg-genesis-charcoal text-genesis-cream relative overflow-hidden border-t border-white/10">
+    <footer ref={ref} className="bg-genesis-charcoal text-genesis-cream relative overflow-hidden border-t border-white/10">
 
       {/* Massive background wordmark — 10% opacity datum typography */}
       <div
@@ -40,34 +35,24 @@ export function Footer() {
 
         {/* Main CTA block */}
         <div className="py-28 md:py-36 border-b border-white/10 text-center md:text-left">
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={mechanicalSpring}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6 flex items-center gap-2 justify-center md:justify-start"
-          >
+          <p className={`reveal-left ${v} font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6 flex items-center gap-2 justify-center md:justify-start`}>
             <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
             Decision intelligence
-          </motion.p>
+          </p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-serif text-genesis-cream leading-tight mb-8 max-w-3xl mx-auto md:mx-0"
-            style={{ fontSize: 'clamp(2.2rem, 4vw + 0.5rem, 4rem)' }}
+          <h2
+            className={`reveal-up ${v} font-serif text-genesis-cream leading-tight mb-8 max-w-3xl mx-auto md:mx-0`}
+            style={{
+              fontSize: 'clamp(2.2rem, 4vw + 0.5rem, 4rem)',
+              transitionDelay: '0.1s',
+            }}
           >
             Find out what&apos;s actually driving your results.
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ ...mechanicalSpring, delay: 0.25 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+          <div
+            className={`reveal-up-sm ${v} flex flex-col sm:flex-row gap-4 justify-center md:justify-start`}
+            style={{ transitionDelay: '0.25s' }}
           >
             <Link
               href="/contact?source=footer-cta"
@@ -81,7 +66,7 @@ export function Footer() {
             >
               See how it works
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* Links + meta row */}

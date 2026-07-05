@@ -2,32 +2,23 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 export function SolutionOverview() {
+  const [ref, visible] = useInView('-100px');
+  const v = visible ? 'is-visible' : '';
+
   return (
     <section
       id="solution"
+      ref={ref}
       className="bg-genesis-cream py-32 px-6 relative z-10 border-b border-genesis-charcoal/10"
     >
       <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
 
         {/* Left — label + headline */}
         <div className="md:col-span-5">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={mechanicalSpring}
-            className="sticky top-32"
-          >
+          <div className={`reveal-left ${v} sticky top-32`}>
             <p className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-pass mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-genesis-pass inline-block" aria-hidden="true" />
               The resolution
@@ -47,49 +38,40 @@ export function SolutionOverview() {
             >
               Get your first profile
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right — body copy */}
         <div className="md:col-span-7 space-y-8 font-sans text-lg text-genesis-charcoal/70 leading-relaxed">
-          <motion.p
-            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.65, ease: 'circOut', delay: 0.1 }}
+          <p
+            className={`reveal-scan ${v}`}
+            style={{ transitionDelay: '0.1s' }}
           >
             When a post performs well, Genesis shows you whether it performed{' '}
             <strong className="text-genesis-charcoal font-medium">because of</strong> your
             strategy—or <strong className="text-genesis-charcoal font-medium">despite</strong> it.
-          </motion.p>
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.65, ease: 'circOut', delay: 0.2 }}
+          <p
+            className={`reveal-scan ${v}`}
+            style={{ transitionDelay: '0.2s' }}
           >
             Coincidental wins are blocked from reinforcing future decisions until
             you recalibrate. Only verified successes and clean failures shape your
             strategy going forward.
-          </motion.p>
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.65, ease: 'circOut', delay: 0.3 }}
+          <p
+            className={`reveal-scan ${v}`}
+            style={{ transitionDelay: '0.3s' }}
           >
             Build on what actually works, not what happened to work once.
-          </motion.p>
+          </p>
 
           {/* Three signal metrics */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ ...mechanicalSpring, delay: 0.4 }}
-            className="grid grid-cols-3 gap-0 border border-genesis-charcoal/20 mt-12"
+          <div
+            className={`reveal-up ${v} grid grid-cols-3 gap-0 border border-genesis-charcoal/20 mt-12`}
+            style={{ transitionDelay: '0.4s' }}
           >
             {[
               { value: '4',     label: 'Verdict types',         sub: 'Pass / Fail / Coincidence / Uncertain' },
@@ -105,7 +87,7 @@ export function SolutionOverview() {
                 <p className="font-mono text-[10px] text-genesis-charcoal/30 mt-1">{stat.sub}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

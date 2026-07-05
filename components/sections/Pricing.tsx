@@ -2,14 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
+import { useInView } from '@/hooks/useInView';
 
 const tiers = [
   {
@@ -51,62 +44,53 @@ const tiers = [
 ];
 
 export function Pricing() {
+  const [ref, visible] = useInView('-100px');
+  const v = visible ? 'is-visible' : '';
+
   return (
     <section
       id="pricing"
+      ref={ref}
       className="bg-genesis-cream py-32 px-6 border-b border-genesis-charcoal/10"
     >
       <div className="max-w-[90rem] mx-auto">
 
         {/* Header */}
         <div className="mb-16">
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={mechanicalSpring}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2"
-          >
+          <p className={`reveal-left ${v} font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-4 flex items-center gap-2`}>
             <span className="w-2 h-2 bg-genesis-teal inline-block" aria-hidden="true" />
             Access
-          </motion.p>
+          </p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-serif text-genesis-charcoal leading-tight mb-3"
-            style={{ fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)' }}
+          <h2
+            className={`reveal-up ${v} font-serif text-genesis-charcoal leading-tight mb-3`}
+            style={{
+              fontSize: 'clamp(2rem, 3.5vw + 0.5rem, 3rem)',
+              transitionDelay: '0.1s',
+            }}
           >
             What you get access to
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="font-mono text-xs text-genesis-charcoal/40 tracking-wider uppercase"
+          <p
+            className={`reveal-fade ${v} font-mono text-xs text-genesis-charcoal/40 tracking-wider uppercase`}
+            style={{ transitionDelay: '0.2s' }}
           >
             Three tiers of access, each building on the last.
-          </motion.p>
+          </p>
         </div>
 
         {/* Brutalist pricing table */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-genesis-charcoal">
           {tiers.map((tier, index) => (
-            <motion.div
+            <div
               key={tier.name}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`border-b border-r border-genesis-charcoal p-8 md:p-12 flex flex-col ${
+              className={`reveal-fade ${v} border-b border-r border-genesis-charcoal p-8 md:p-12 flex flex-col ${
                 tier.highlight
                   ? 'bg-genesis-charcoal text-genesis-cream'
                   : 'bg-transparent text-genesis-charcoal'
               }`}
+              style={{ transitionDelay: `${index * 0.1}s` }}
             >
               {/* Tier header */}
               <div className="mb-10">
@@ -151,7 +135,7 @@ export function Pricing() {
               >
                 Request access
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

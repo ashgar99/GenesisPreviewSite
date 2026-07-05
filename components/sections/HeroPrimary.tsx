@@ -2,15 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { CalibrationGrid } from '@/components/ui/CalibrationGrid';
-
-const mechanicalSpring = {
-  type: 'spring' as const,
-  stiffness: 400,
-  damping: 40,
-  mass: 1,
-};
 
 const verdictData = [
   { label: 'Pass',        count: 4, color: 'bg-genesis-pass'        },
@@ -43,46 +35,28 @@ export function HeroPrimary() {
         <div className="max-w-3xl">
 
           {/* Kicker — monospace */}
-          <motion.p
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ ...mechanicalSpring, delay: 0.1 }}
-            className="font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6"
-          >
+          <p className="hero-kicker font-mono text-xs tracking-[0.2em] uppercase text-genesis-teal mb-6">
             Turn marketing into data.
-          </motion.p>
+          </p>
 
           {/* H1 — serif, massive */}
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...mechanicalSpring, delay: 0.2 }}
-            className="font-serif text-genesis-cream mb-6 leading-[1.08] tracking-tight"
+          <h1
+            className="hero-h1 font-serif text-genesis-cream mb-6 leading-[1.08] tracking-tight"
             style={{ fontSize: 'clamp(2.8rem, 6vw + 1rem, 5.5rem)' }}
           >
             Know which posts worked—
             <br className="hidden sm:block" />
             <span className="italic">and why.</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtext — scanner reveal */}
-          <motion.p
-            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
-            animate={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
-            transition={{ duration: 0.7, ease: 'circOut', delay: 0.45 }}
-            className="font-sans text-lg text-genesis-cream/70 leading-relaxed max-w-xl mb-10"
-          >
+          <p className="hero-subtext font-sans text-lg text-genesis-cream/70 leading-relaxed max-w-xl mb-10">
             Genesis analyses your LinkedIn content against your goals and shows
             you whether results came from your strategy—or from something else.
-          </motion.p>
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...mechanicalSpring, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16"
-          >
+          <div className="hero-ctas flex flex-col sm:flex-row gap-4 mb-16">
             <Link
               href="/contact?source=hero-primary"
               className="interactive-zone inline-flex items-center justify-center px-7 py-4 font-mono text-xs tracking-widest uppercase bg-genesis-cream text-genesis-charcoal hover:bg-white transition-colors"
@@ -95,15 +69,10 @@ export function HeroPrimary() {
             >
               See how it works
             </Link>
-          </motion.div>
+          </div>
 
           {/* Genesis Profile data block */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...mechanicalSpring, delay: 0.75 }}
-            className="border border-white/10 bg-genesis-charcoal/70 backdrop-blur-sm p-5 inline-block"
-          >
+          <div className="hero-data-block border border-white/10 bg-genesis-charcoal/70 backdrop-blur-sm p-5 inline-block">
             <div className="flex items-center justify-between gap-8 mb-4 pb-3 border-b border-white/10">
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-genesis-teal">
                 Genesis Profile — Sample
@@ -138,7 +107,7 @@ export function HeroPrimary() {
                 +9%
               </span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
